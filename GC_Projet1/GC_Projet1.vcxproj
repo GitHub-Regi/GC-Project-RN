@@ -133,11 +133,15 @@
   <ItemGroup>
     <ClInclude Include="framework.h" />
     <ClInclude Include="GC_Projet1.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GC_Projet1.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GC_Projet1.rc" />

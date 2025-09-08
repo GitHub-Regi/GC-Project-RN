@@ -4,6 +4,7 @@
 #include "framework.h"
 #include "GC_Projet1.h"
 #include <SFML/Graphics.hpp>
+#include "Player.h"
 
 #define MAX_LOADSTRING 100
 
@@ -26,7 +27,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-
+    Player p1;
 
     // Initialise les chaînes globales
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -46,6 +47,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // Boucle de messages principale :
     while (GetMessage(&msg, nullptr, 0, 0))
     {
+
         if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
         {
             TranslateMessage(&msg);
@@ -55,7 +57,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     return (int) msg.wParam;
 }
-
 
 
 //
