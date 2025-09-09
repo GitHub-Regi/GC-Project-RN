@@ -2,8 +2,9 @@
 
 #include <SFMl/graphics.hpp>
 #include "Input.h"
+#include "State.h"
 
-class Entity
+class Entity : public State
 {
 protected:
 	sf::RectangleShape shape;
