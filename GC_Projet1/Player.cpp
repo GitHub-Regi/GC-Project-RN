@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-    shape.setSize(sf::Vector2f(50, 30));
+    shape.setSize(sf::Vector2f(100, 30));
     shape.setOrigin({ 10.f, 100.f });
     shape.setFillColor(sf::Color::Green);
     shape.setPosition({ 640.f, 650.f });
