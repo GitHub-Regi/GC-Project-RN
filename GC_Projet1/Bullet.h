@@ -8,10 +8,10 @@ public :
 	Bullet(sf::Vector2f position);
 
 private:
-	float speed = 0.f;
+	float speed;
 
 public:
-	void Update(float dt, class Input& input) override;
+	void Update(float dt, class Input& input, std::vector<Bullet*>& bullets) override;
 
 };
 

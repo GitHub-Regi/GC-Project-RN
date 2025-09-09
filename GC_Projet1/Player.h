@@ -1,24 +1,16 @@
 #pragma once
 
+#include <vector>
 #include "Entity.h"
+#include "Bullet.h"
+
 
 class Player : public Entity
 {
 public:
 	Player();
 
-	void Update(float dt, class Input& input) override;
+	void Update(float dt, class Input& input, std::vector<Bullet*>& bullets) override;
 };
 
-/*state();
-virtual destructor;
-void tostate(int id)
-
-onenter(oldstate)0
-onexecute0
-onexit(newstate)0
-
-protected
-int m_state
-float m_statetime*/
 

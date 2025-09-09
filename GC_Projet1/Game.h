@@ -9,6 +9,7 @@
 #include "Input.h"
 #include "Timer.h"
 #include "Resource.h"
+#include "Bullet.h"
 
 class Game
 {

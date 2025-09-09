@@ -8,7 +8,7 @@ Player::Player()
     shape.setPosition({ 640.f, 700.f });
 }
 
-void Player::Update(float dt, Input& input)
+void Player::Update(float dt, Input& input, std::vector<Bullet*>& bullets)
 {
     float speed = 400.0f;
     sf::Vector2f movement(0.f, 0.f);
@@ -60,5 +60,12 @@ void Player::Update(float dt, Input& input)
     if (pos.y > 700) pos.y = 700;
 
     shape.setPosition(pos);
+
+    //Shooting  
+    if (input.IsKey(32))
+    {
+        sf::Vector2f bulletPos(pos.x + size.x, 0.f);
+        bullets.push_back(new Bullet(bulletPos));
+    }
 }
 
