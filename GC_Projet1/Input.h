@@ -1,7 +1,5 @@
 #pragma once
 
-#include <bitset>
-
 enum KeyState {
 	neutral,
 	keyDown,
@@ -12,7 +10,6 @@ enum KeyState {
 class Input
 {
 	private:
-		//std::byte m_tabKey[256]; //tableau detat des touches
 		KeyState m_tabKey[256];
 
 	public:
@@ -22,24 +19,17 @@ class Input
 		//Destructeur
 		virtual ~Input();
 
-
+		bool IsKey(int key);
+		bool IsKeyDown(int key);
+		bool IsKeyUp(int key);
 
 		//Getter tabKey
 		KeyState getTabKey(int i); 
-
-		//Setter tabKey
-		void setTabKey(KeyState tk[256]);
-
-
 
 		//capture l'etat des touches
 		void captureInput();
 		
 		//faire un update
 		void update();
-
-
-
-
 };
 

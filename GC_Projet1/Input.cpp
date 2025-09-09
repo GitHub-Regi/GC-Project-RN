@@ -1,6 +1,5 @@
 #include <windows.h>
 #include "Input.h"
-//#include <winuser.h>
 
 Input::Input()
 {
@@ -14,16 +13,34 @@ Input::~Input()
 {
 }
 
+bool Input::IsKey(int key)
+{
+	if (m_tabKey[key] == maintain || m_tabKey[key] == keyDown) {
+		return true;
+	}
+	return false;
+	
+}
+
+bool Input::IsKeyDown(int key)
+{
+	if (m_tabKey[key] == keyDown) {
+		return true;
+	}
+	return false;
+}
+
+bool Input::IsKeyUp(int key)
+{
+	if (m_tabKey[key] == keyUp) {
+		return true;
+	}
+	return false;
+}
+
 KeyState Input::getTabKey(int i)
 {
 	return m_tabKey[i];
-}
-
-void Input::setTabKey(KeyState tk[256] )
-{
-	for (int i = 0; i < 256; i++) {
-		m_tabKey[i] = tk[i];
-	}
 }
 
 void Input::captureInput()
@@ -35,6 +52,9 @@ void Input::captureInput()
 			//touche pressé
 			finalValue = keyDown;
 			if (m_tabKey[i] == keyDown) {
+				finalValue = maintain;
+			}
+			if (m_tabKey[i] == maintain) {
 				finalValue = maintain;
 			}
 		}

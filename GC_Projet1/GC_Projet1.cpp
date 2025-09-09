@@ -20,7 +20,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     _In_ int       nCmdShow)
 {
 
-    sf::RenderWindow window(sf::VideoMode({ 1280 , 720  }), "SFML works!");
+    //App* pApp = new App;
+    //App->Run();
+    //delete pApp;
+    //return 0;
+
+    sf::RenderWindow window(sf::VideoMode({ 1280, 720  }), "SFML works!");
     window.setFramerateLimit(60);
 
     Timer timer;
@@ -38,6 +43,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         float dt = timer.GetDeltaTime();
         player.Update(dt, input);
+        input.update();
 
         window.clear(sf::Color::Black);
         player.Draw(window);
