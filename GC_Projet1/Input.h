@@ -2,13 +2,18 @@
 
 #include <bitset>
 
+enum KeyState {
+	neutral,
+	keyDown,
+	keyUp,
+	maintain
+};
+
 class Input
 {
 	private:
-		bool m_keyPress;
-		int m_keycode; //basé sur le code ASCII
-		std::byte m_tabKey[256]; // keycode/etat
-
+		//std::byte m_tabKey[256]; //tableau detat des touches
+		KeyState m_tabKey[256];
 
 	public:
 		//Constructeur par défaut
@@ -19,28 +24,19 @@ class Input
 
 
 
-		//Getter keyPress
-		bool getKeyPress();
-
-		//Setter keyPress
-		void setKeyPress(bool kp);
-
-		//Getter keycode
-		int getKeycode();
-
-		//Setter keycode
-		void setKeycode(int kc);
-
 		//Getter tabKey
-		std::byte getTabKey(int i); 
+		KeyState getTabKey(int i); 
 
 		//Setter tabKey
-		void setTabKey(std::byte tk[256]);
+		void setTabKey(KeyState tk[256]);
 
 
 
 		//capture l'etat des touches
 		void captureInput();
+		
+		//faire un update
+		void update();
 
 
 
