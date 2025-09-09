@@ -10,10 +10,15 @@ void Timer::Reset()
 	lastTime = timeGetTime();
 }
 
-float Timer::GetDeltaTime()
+void Timer::UpdateDeltaTime()
 {
 	DWORD currentTime = timeGetTime();
 	DWORD elapsed = currentTime - lastTime;
 	lastTime = currentTime;
-	return elapsed / 1000.f;
+	m_deltaTime =  elapsed / 1000.f;
+}
+
+float Timer::getDeltaTime()
+{
+	return m_deltaTime;
 }

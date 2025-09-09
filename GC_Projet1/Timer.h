@@ -10,8 +10,13 @@ public:
 private:
 	DWORD lastTime;
 
+	float m_totalTime;
+	float m_deltaTime;
+
 public:
+
 	void Reset();
-	float GetDeltaTime();
+	void UpdateDeltaTime();
+	float getDeltaTime();
 };
 

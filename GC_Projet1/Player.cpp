@@ -10,34 +10,53 @@ Player::Player()
 
 void Player::Update(float dt, Input& input)
 {
-    float speed = 350.0f;
+    float speed = 400.0f;
     sf::Vector2f movement(0.f, 0.f);
 
-    if (input.IsKeyPressed('Q'))
-    {
-        movement.x -= speed * dt;
-    }
-    if (input.IsKeyPressed('D'))
+    //Moving Right
+    if (input.IsKey('D'))
     {
         movement.x += speed * dt;
     }
-    if (input.IsKeyPressed('Z'))
+    if (input.IsKeyDown('D')) {
+        movement.x += speed * dt;
+    }
+
+    //Moving Left
+    if (input.IsKey('Q'))
+    {
+        movement.x -= speed * dt;
+    }
+    if (input.IsKeyDown('Q')) {
+        movement.x -= speed * dt;
+    }
+
+    //Moving Up
+    if (input.IsKey('Z'))
     {
         movement.y -= speed * dt;
     }
-    if (input.IsKeyPressed('S'))
+    if (input.IsKeyDown('Z')) {
+        movement.y -= speed * dt;
+    }
+
+    //Moving Down
+    if (input.IsKey('S'))
     {
         movement.y += speed * dt;
     }
-    
+    if (input.IsKeyDown('S')) {
+        movement.y += speed * dt;
+    }
+
     shape.move(movement);
 
-    sf::Vector2f pos = shape.getPosition();
-    sf::Vector2f size = shape.getSize();
+    sf::Vector2 pos = shape.getPosition();
+    sf::Vector2 size = shape.getSize();
 
-    if (pos.x < 100) pos.x = 100;
-    if (pos.y < 500) pos.y = 500;
-    if (pos.x > 1180) pos.x = 1180;
+    if (pos.x < 30) pos.x = 30;
+    if (pos.y < 550) pos.y = 550;
+    if (pos.x > 1250) pos.x = 1250;
     if (pos.y > 700) pos.y = 700;
 
     shape.setPosition(pos);
