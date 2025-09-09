@@ -1,7 +1,7 @@
 #pragma once
 
 #include <SFMl/graphics.hpp>
-//#include "Input.h"
+#include "Input.h"
 
 class Entity
 {

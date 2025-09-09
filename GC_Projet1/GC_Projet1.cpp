@@ -47,7 +47,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
-    sf::RenderWindow window(g_hWnd);
+    sf::RenderWindow window;
+    window.create(g_hWnd);
+
     window.setFramerateLimit(60);
 
     Timer timer;
@@ -76,9 +78,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         window.display();
 
     }
+    return (int)msg.wParam;
 }
 
-    
+
 //
 //  FONCTION : MyRegisterClass()
 //
@@ -119,16 +122,16 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Stocke le handle d'instance dans la variable globale
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+   g_hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
-   if (!hWnd)
+   if (!g_hWnd)
    {
       return FALSE;
    }
 
-   ShowWindow(hWnd, nCmdShow);
-   UpdateWindow(hWnd);
+   ShowWindow(g_hWnd, nCmdShow);
+   UpdateWindow(g_hWnd);
 
    return TRUE;
 }
