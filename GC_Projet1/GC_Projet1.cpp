@@ -4,7 +4,11 @@
 #include "framework.h"
 #include "GC_Projet1.h"
 #include <SFML/Graphics.hpp>
+
 #include "Player.h"
+#include "Input.h"
+#include "Timer.h"
+#include "Resource.h"
 
 #define MAX_LOADSTRING 100
 
@@ -12,6 +16,7 @@
 HINSTANCE hInst;                                // instance actuelle
 WCHAR szTitle[MAX_LOADSTRING];                  // Texte de la barre de titre
 WCHAR szWindowClass[MAX_LOADSTRING];            // nom de la classe de fenêtre principale
+HWND g_hWnd = nullptr;
 
 // Déclarations anticipées des fonctions incluses dans ce module de code :
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -20,14 +25,12 @@ LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-                     _In_opt_ HINSTANCE hPrevInstance,
-                     _In_ LPWSTR    lpCmdLine,
-                     _In_ int       nCmdShow)
+    _In_opt_ HINSTANCE hPrevInstance,
+    _In_ LPWSTR    lpCmdLine,
+    _In_ int       nCmdShow)
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
-
-    Player p1;
 
     // Initialise les chaînes globales
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
@@ -35,7 +38,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MyRegisterClass(hInstance);
 
     // Effectue l'initialisation de l'application :
-    if (!InitInstance (hInstance, nCmdShow))
+    if (!InitInstance(hInstance, nCmdShow))
     {
         return FALSE;
     }
@@ -44,21 +47,38 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
-    // Boucle de messages principale :
-    while (GetMessage(&msg, nullptr, 0, 0))
+    sf::RenderWindow window(g_hWnd);
+    window.setFramerateLimit(60);
+
+    Timer timer;
+    Input input;
+    Player player;
+
+    bool running = true;
+    while (running)
     {
-
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        // Boucle de messages principale :
+        while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+            if (msg.message == WM_QUIT) running = false;
+            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
         }
-    }
 
-    return (int) msg.wParam;
+        float dt = timer.GetDeltaTime();
+        player.Update(dt, input);
+
+        window.clear(sf::Color::Black);
+        player.Draw(window);
+        window.display();
+
+    }
 }
 
-
+    
 //
 //  FONCTION : MyRegisterClass()
 //

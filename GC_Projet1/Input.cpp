@@ -1,8 +1,7 @@
-
+#include <Windows.h>
 #include "Input.h"
-#include <winuser.h>
 
-Input::Input()
+/*Input::Input()
 {
 	m_keyPress = false;
 	m_keycode = 0;
@@ -52,6 +51,6 @@ void Input::captureInput()
 		int finalValue;
 		m_tabKey[i] = std::byte{finalValue}; //final value = 0,1,2 ou 3 pour l'enum
 	}
-}
+}*/
 
 

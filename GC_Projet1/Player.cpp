@@ -1,36 +1,18 @@
 #include "Player.h"
-#include "Timer.h"
-#include <SFML/Graphics.hpp>
 
 Player::Player()
 {
-    sf::RenderWindow window(sf::VideoMode({ 1280, 720 }), "SFML works!");
-    sf::RectangleShape playerShip({ 20.f, 100.f });
-    playerShip.setFillColor(sf::Color::Green);
-
-    playerShip.setOrigin({ 10.f, 100.f });
-    playerShip.setPosition({ 640.f, 650.f});
-
-    while (window.isOpen())
-    {
-        while (const std::optional event = window.pollEvent())
-        {
-            if (event->is<sf::Event::Closed>())
-                window.close();
-        }
-
-        window.clear();
-        window.draw(playerShip);
-        window.display();
-    }
+    shape.setSize(sf::Vector2f(50, 30));
+    shape.setOrigin({ 10.f, 100.f });
+    shape.setFillColor(sf::Color::Green);
+    shape.setPosition({ 640.f, 650.f });
 }
 
-Player::~Player()
+void Player::Update(float dt, Input& input)
 {
+    float speed = 200.0f;
+    sf::Vector2f movement(0.f, 0.f);
 
-}
-void Player::MovePlayer()
-{
-
+    shape.move(movement);
 }
 

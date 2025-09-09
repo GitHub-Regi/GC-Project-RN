@@ -1,11 +1,12 @@
 #pragma once
-class Player
+
+#include "Entity.h"
+
+class Player : public Entity
 {
 public:
 	Player();
 
-	virtual ~Player();
-
-	void MovePlayer();
+	void Update(float dt, Input& input) override;
 };
 

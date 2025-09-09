@@ -1,15 +1,17 @@
 #pragma once
+
+#include <Windows.h>
+
 class Timer
 {
+public:
+	Timer();
+
 private:
-	unsigned int oldTime = 0;
-	unsigned int currentTime = 0;
-
-	float deltaTime = 0.f;
-	float totalTime = 0.f;
-
+	DWORD lastTime;
 
 public:
-	void Update();
+	void Reset();
+	float GetDeltaTime();
 };
 

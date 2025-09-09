@@ -1,13 +1,19 @@
 #include "Timer.h"
-#include <Windows.h>
-#include <SFML/Graphics.hpp>
 
-void Timer::Update()
+Timer::Timer()
 {
-	oldTime = currentTime;
-	currentTime = timeGetTime();
-	unsigned int intDeltaTime = currentTime - oldTime;
+	lastTime = timeGetTime();
+}
 
-	deltaTime = intDeltaTime / 1000;
-	totalTime += deltaTime;
+void Timer::Reset()
+{
+	lastTime = timeGetTime();
+}
+
+float Timer::GetDeltaTime()
+{
+	DWORD currentTime = timeGetTime();
+	DWORD elapsed = currentTime - lastTime;
+	lastTime = currentTime;
+	return elapsed / 1000.f;
 }
