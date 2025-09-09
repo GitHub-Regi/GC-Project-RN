@@ -1,9 +1,9 @@
-﻿  GC_Projet1.cpp
+﻿  Entity.cpp
+C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Entity.h(14,32): error C2061: erreur de syntaxe : identificateur 'Input'
+  GC_Projet1.cpp
+C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Entity.h(14,32): error C2061: erreur de syntaxe : identificateur 'Input'
+C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Player.h(10,24): error C2061: erreur de syntaxe : identificateur 'Input'
   Player.cpp
-  Timer.cpp
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Timer.cpp(11,27): warning C4244: '=' : conversion de 'unsigned int' en 'float', perte possible de données
-  Génération de code en cours
-  Previous IPDB and IOBJ mismatch, fall back to full compilation.
-  All 55 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Fin de la génération du code
-  GC_Projet1.vcxproj -> C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\x64\Release\GC_Projet1.exe
+C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Entity.h(14,32): error C2061: erreur de syntaxe : identificateur 'Input'
+C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Player.h(10,24): error C2061: erreur de syntaxe : identificateur 'Input'
+C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Player.cpp(11,31): error C2061: erreur de syntaxe : identificateur 'Input'
