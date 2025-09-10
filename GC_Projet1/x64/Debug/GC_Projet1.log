@@ -1,2 +1,6 @@
-﻿  Player.cpp
+﻿  Game.cpp
+C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Game.cpp(90,26): warning C4834: abandon de la valeur de retour de la fonction ayant l'attribut 'nodiscard'
+C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Game.cpp(144,26): warning C4834: abandon de la valeur de retour de la fonction ayant l'attribut 'nodiscard'
+  Player.cpp
+  Génération de code en cours...
   GC_Projet1.vcxproj -> C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\x64\Debug\GC_Projet1.exe

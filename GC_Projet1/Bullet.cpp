@@ -4,6 +4,10 @@ Bullet::Bullet()
 {
 }
 
+Bullet::~Bullet()
+{
+}
+
 void Bullet::initBullet(sf::Vector2f position)
 {
 	shape.setSize(sf::Vector2f(10, 20));
@@ -18,11 +22,6 @@ void Bullet::Update(float dt)
 	
 	UpdateStateTime(dt);
 	onExecute(m_currentState, dt);
-
-	if (shape.getPosition().y + shape.getSize().y < 100)
-	{
-		toState(1);
-	}
 }
 
 void Bullet::onExit(int id)
@@ -47,10 +46,6 @@ void Bullet::onEnter(int id)
 	{
 		shape.setFillColor(sf::Color::Red);
 	}
-	else if (id == 2)
-	{
-		shape.setFillColor(sf::Color::Transparent);
-	}
 }
 
 void Bullet::onExecute(int id, float dt)
@@ -58,16 +53,21 @@ void Bullet::onExecute(int id, float dt)
 	if (id == 0)
 	{
 		shape.move(sf::Vector2f(0.f, -speed * dt));
+
+		if (shape.getPosition().y + shape.getSize().y < 0)
+		{
+			toState(1);
+		}
 	}
 	else if (id == 1)
 	{
-		if (m_stateTime > 0.5f)
+		if (m_stateTime >= 0.5f)
 		{
 			toState(2);
 		}
 	}
 	else if (id == 2)
 	{
-		
+		this->~Bullet();
 	}
 }
