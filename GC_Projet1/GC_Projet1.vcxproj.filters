@@ -45,6 +45,12 @@
     <ClInclude Include="State.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GC_Projet1.cpp">
@@ -66,6 +72,12 @@
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="State.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

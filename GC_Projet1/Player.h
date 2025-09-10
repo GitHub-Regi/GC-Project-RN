@@ -11,7 +11,17 @@ class Player : public Entity
 public:
 	Player();
 
-	void Update(float dt, class Input& input, std::vector<Bullet*>& bullets) override;
+	Player(Input* input, std::vector<Bullet*>* bullets);
+
+	~Player();
+
+	void initPlayer();
+
+	void Update(float dt) override;
+
+	private:
+		Input* m_input;
+		std::vector<Bullet*>* m_bullets;
 };
 
 

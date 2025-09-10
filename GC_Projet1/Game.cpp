@@ -1,11 +1,26 @@
 #include "Game.h"
 
+#include "framework.h"
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+
+#include "Player.h"
+#include "Input.h"
+#include "Timer.h"
+#include "Bullet.h"
+
 Game::Game()
 {
+    m_input = new Input();
+    m_bullets = new std::vector<Bullet*>;
+    m_player = new Player(m_input, m_bullets);
 }
 
 Game::~Game()
 {
+    delete m_input;
+    delete m_bullets;
+    delete m_player;
 }
 
 void Game::Run()
@@ -13,11 +28,7 @@ void Game::Run()
     sf::RenderWindow window(sf::VideoMode({ 1280, 720 }), "SFML works!");
     window.setFramerateLimit(60);
 
-    Timer timer;
-    Input input;
-    Player player;
-
-    std::vector<Bullet*> bullets;
+    m_player->initPlayer();
 
     while (window.isOpen())
     {
@@ -30,15 +41,15 @@ void Game::Run()
 
         
 
-        timer.UpdateDeltaTime();
-        input.update();
-        player.Update(timer.getDeltaTime(), input, bullets);
+        m_timer.UpdateDeltaTime();
+        m_input->update();
+        m_player->Update(m_timer.getDeltaTime());
 
         //for (size_t i = 0)
 
         window.clear(sf::Color::Black);
-        player.Draw(window);
-        for (auto b : bullets) b->Draw(window);
+        m_player->Draw(window);
+        for (Bullet* b : (*m_bullets)) b->Draw(window);
         window.display();
 
     }
