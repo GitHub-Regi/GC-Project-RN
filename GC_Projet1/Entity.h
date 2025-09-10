@@ -20,5 +20,8 @@ public:
 		window.draw(shape);
 	}
 
+	sf::Vector2f GetPos() const { return shape.getPosition(); }
+	sf::Vector2f GetSize() const { return shape.getSize(); }
+
 };
 
