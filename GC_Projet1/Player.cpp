@@ -6,6 +6,9 @@ Player::Player()
     shape.setOrigin({ 20.f, 70.f });
     shape.setFillColor(sf::Color::Green);
     shape.setPosition({ 640.f, 700.f });
+    speed = 350.f;
+
+    toState(0);
 }
 
 Player::~Player()
@@ -15,9 +18,56 @@ Player::~Player()
 
 void Player::Update(float dt, Input& input, std::vector<Bullet*>& bullets)
 {
-    float speed = 400.0f;
+    UpdateStateTime(dt);
+    onExecute(m_currentState, dt);
+
+    //Shooting  
+    if (m_currentState == 0 && input.IsKeyDown(32))
+    {
+        sf::Vector2f bulletPos(shape.getPosition());
+        bulletPos.x -= shape.getSize().x / 2.f;
+        bulletPos.y -= shape.getSize().y;
+        bullets.push_back(new Bullet(bulletPos));
+    }
+}
+
+void Player::onExit(int id)
+{
+
+}
+
+void Player::onEnter(int id)
+{
+    if (id == 0)
+    {
+        shape.setFillColor(sf::Color::Green);
+    }
+    else if (id == 1)
+    {
+        shape.setFillColor(sf::Color::Yellow);
+    }
+    else if (id == 2)
+    {
+        shape.setFillColor(sf::Color::Red);
+    }
+
+    m_stateTime = 0.f;
+}
+
+void Player::onExecute(int id, float dt)
+{
     sf::Vector2f movement(0.f, 0.f);
 
+    if (id == 0 || id == 1)
+    {
+        
+    }
+    else if (id == 2)
+    {
+        
+    }
+}
+/*
     //Moving Right
     if (input.IsKey('D'))
     {
@@ -65,12 +115,5 @@ void Player::Update(float dt, Input& input, std::vector<Bullet*>& bullets)
     if (pos.y > 700) pos.y = 700;
 
     shape.setPosition(pos);
-
-    //Shooting  
-    if (input.IsKeyDown(32))
-    {
-        sf::Vector2f bulletPos(pos.x - 5.f, pos.y - size.y);
-        bullets.push_back(new Bullet(bulletPos));
-    }
 }
-
+*/
