@@ -1,7 +1,20 @@
 #include "Player.h"
 
-Player::Player()
+Player::Player() 
 {
+}
+
+Player::Player(Input* input, std::vector<Bullet*>* bullets)
+{
+    m_input = input;
+    m_bullets = bullets;
+}
+
+Player::~Player()
+{
+}
+
+void Player::initPlayer(){
     shape.setSize(sf::Vector2f(40, 70));
     shape.setOrigin({ 20.f, 70.f });
     shape.setFillColor(sf::Color::Green);
@@ -56,6 +69,8 @@ void Player::onEnter(int id)
 
 void Player::onExecute(int id, float dt)
 {
+void Player::Update(float dt) {
+    float speed = 400.0f;
     sf::Vector2f movement(0.f, 0.f);
 
     if (id == 0 || id == 1)
@@ -69,38 +84,38 @@ void Player::onExecute(int id, float dt)
 }
 /*
     //Moving Right
-    if (input.IsKey('D'))
+    if (m_input->IsKey('D'))
     {
         movement.x += speed * dt;
     }
-    if (input.IsKeyDown('D')) {
+    if (m_input->IsKeyDown('D')) {
         movement.x += speed * dt;
     }
 
     //Moving Left
-    if (input.IsKey('Q'))
+    if (m_input->IsKey('Q'))
     {
         movement.x -= speed * dt;
     }
-    if (input.IsKeyDown('Q')) {
+    if (m_input->IsKeyDown('Q')) {
         movement.x -= speed * dt;
     }
 
     //Moving Up
-    if (input.IsKey('Z'))
+    if (m_input->IsKey('Z'))
     {
         movement.y -= speed * dt;
     }
-    if (input.IsKeyDown('Z')) {
+    if (m_input->IsKeyDown('Z')) {
         movement.y -= speed * dt;
     }
 
     //Moving Down
-    if (input.IsKey('S'))
+    if (m_input->IsKey('S'))
     {
         movement.y += speed * dt;
     }
-    if (input.IsKeyDown('S')) {
+    if (m_input->IsKeyDown('S')) {
         movement.y += speed * dt;
     }
 
@@ -117,3 +132,13 @@ void Player::onExecute(int id, float dt)
     shape.setPosition(pos);
 }
 */
+
+    //Shooting  
+    if (m_input->IsKeyDown(32))
+    {
+        sf::Vector2f bulletPos(pos.x - 5.f, pos.y - size.y);
+        Bullet* bul = new Bullet();
+        bul->initBullet(bulletPos);
+        m_bullets->push_back(bul);
+    }
+}

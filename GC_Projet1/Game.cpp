@@ -1,19 +1,36 @@
 #include "Game.h"
 
+#include "framework.h"
+#include <SFML/Graphics.hpp>
+#include <SFML/Window.hpp>
+
+#include "Player.h"
+#include "Input.h"
+#include "Timer.h"
+#include "Bullet.h"
+
 Game::Game()
     : window(sf::VideoMode({ 1280, 720 }), "SFML works!")
 {
+    m_input = new Input();
+    //m_bullets = new std::vector<Bullet*>;
+    //m_player = new Player(m_input, m_bullets);
     toState(0);
 }
 
 Game::~Game()
 {
-    for (auto b : bullets) delete b;
+    delete m_input;
+    delete m_bullets;
+    delete m_player;
+    //for (auto b : bullets) delete b;
 }
 
 void Game::Run()
 {
     window.setFramerateLimit(60);
+
+    //m_player->initPlayer();
 
     while (window.isOpen())
     {
@@ -24,9 +41,11 @@ void Game::Run()
                 window.close();
         }
 
-        float dt = timer.getDeltaTime();
-        timer.UpdateDeltaTime();
-        input.update();
+        
+        float dt = m_timer.getDeltaTime();
+        m_timer.UpdateDeltaTime();
+        m_input->update();
+        //m_player->Update(dt);
 
         UpdateStateTime(dt);
         onExecute(m_currentState, dt);
@@ -35,7 +54,18 @@ void Game::Run()
 
 void Game::onExit(int id)
 {
-    
+    if (id == 0)
+    {
+
+    }
+    else if (id == 1)
+    {
+        
+    }
+    else if (id == 2)
+    {
+
+    }
 }
 
 void Game::onEnter(int id)
@@ -46,10 +76,14 @@ void Game::onEnter(int id)
     }
     else if (id == 1)
     {
-        player = Player();
+        //player = Player();
 
-        for (auto b : bullets) delete b;
-        bullets.clear();
+        //for (auto b : bullets) delete b;
+        //bullets.clear();
+
+        m_bullets = new std::vector<Bullet*>;
+        m_player = new Player(m_input, m_bullets);
+        m_player->initPlayer();
     }
     else if (id == 2)
     {
@@ -70,18 +104,18 @@ void Game::onExecute(int id, float dt)
         text.setPosition(sf::Vector2f(300.f, 350.f));
         window.draw(text);
 
-        if (input.IsKeyDown(VK_RETURN))
+        if (m_input->IsKeyDown(VK_RETURN))
         {
             toState(1);
         }
     }
     else if (id == 1)
     {
-        player.Update(dt, input, bullets);
+        m_player->Update(dt);
 
-        for (auto b : bullets)
+        for (Bullet* b: (*m_bullets))
         {
-            b->Update(dt, input, bullets);
+            b->Update(dt);
 
             if (b->GetPos().y + b->GetSize().y < 0)
             {
@@ -89,24 +123,25 @@ void Game::onExecute(int id, float dt)
             }
         }
 
-        for (auto it = bullets.begin(); it != bullets.end(); )
+        for (auto it = (*m_bullets).begin(); it != (*m_bullets).end();)
         {
             if ((*it)->GetState() == 2)
             {
                 delete *it;
-                it = bullets.erase(it);
+                it = (*m_bullets).erase(it);
             }
             else
             {
                 ++it;
             }
         }
+;       
+        window.clear();
+        m_player->Draw(window);
+        for (Bullet* b : (*m_bullets)) b->Draw(window);
+;
 
-        window.clear(sf::Color::Black);
-        player.Draw(window);
-        for (auto b : bullets) b->Draw(window);
-
-        if (player.GetPos().x + player.GetSize().x < 100)
+        if (m_player->GetPos().x + m_player->GetSize().x < 100)
         {
             toState(2);
         }
@@ -123,7 +158,7 @@ void Game::onExecute(int id, float dt)
         text.setPosition(sf::Vector2f(300.f, 350.f));
         window.draw(text);
 
-        if (input.IsKeyDown(VK_RETURN))
+        if (m_input->IsKeyDown(VK_RETURN))
         {
             toState(1);
         }

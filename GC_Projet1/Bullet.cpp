@@ -1,17 +1,21 @@
 #include "Bullet.h"
 
-Bullet::Bullet(sf::Vector2f position)
+Bullet::Bullet()
+{
+}
+
+void Bullet::initBullet(sf::Vector2f position)
 {
 	shape.setSize(sf::Vector2f(10, 20));
 	shape.setFillColor(sf::Color::Blue);
 	shape.setPosition(position);
 	speed = 400.f;
-
-	toState(0);
 }
 
-void Bullet::Update(float dt, class Input& input, std::vector<Bullet*>& bullets)
+void Bullet::Update(float dt)
 {
+	shape.move(sf::Vector2f(0.f, -speed * m_dt));
+	
 	UpdateStateTime(dt);
 	onExecute(m_currentState, dt);
 

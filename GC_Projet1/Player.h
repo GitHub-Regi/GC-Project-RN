@@ -12,7 +12,17 @@ class Player : public Entity, public State
 public:
 	Player();
 
+	Player(Input* input, std::vector<Bullet*>* bullets);
+
 	~Player();
+
+	void initPlayer();
+
+	void Update(float dt) override;
+
+private:
+	Input* m_input;
+	std::vector<Bullet*>* m_bullets;
 
 private:
 	float speed = 0.f;

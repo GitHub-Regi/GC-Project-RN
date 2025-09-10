@@ -1,10 +1,5 @@
 #pragma once
 
-#include "framework.h"
-#include "GC_Projet1.h"
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-
 #include "Player.h"
 #include "Input.h"
 #include "Timer.h"
@@ -17,12 +12,12 @@ public:
 
 	~Game();
 
-private: 
+private:
 	sf::RenderWindow window;
-	Timer timer;
-	Input input;
-	Player player;
-	std::vector<Bullet*> bullets;
+	Timer m_timer;
+	Input* m_input;
+	std::vector<Bullet*>* m_bullets;
+	Player* m_player;
 
 public: 
 	void Run();

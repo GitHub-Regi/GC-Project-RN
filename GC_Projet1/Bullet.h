@@ -6,13 +6,17 @@
 class Bullet : public Entity, public State
 {
 public :
-	Bullet(sf::Vector2f position);
+	//Bullet(sf::Vector2f position);
+	Bullet();
 
 private:
 	float speed;
+	float m_dt;
 
 public:
-	void Update(float dt, class Input& input, std::vector<Bullet*>& bullets) override;
+	void initBullet(sf::Vector2f position);
+
+	void Update(float dt) override;
 
 	void onExit(int id) override;
 
