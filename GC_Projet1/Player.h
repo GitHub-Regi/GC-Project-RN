@@ -24,11 +24,9 @@ private:
 	Input* m_input;
 	std::vector<Bullet*>* m_bullets;
 
-private:
 	float speed = 0.f;
 
 public:
-	void Update(float dt, class Input& input, std::vector<Bullet*>& bullets) override;
 
 	void onExit(int id) override;
 

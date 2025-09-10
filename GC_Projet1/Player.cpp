@@ -12,6 +12,7 @@ Player::Player(Input* input, std::vector<Bullet*>* bullets)
 
 Player::~Player()
 {
+
 }
 
 void Player::initPlayer(){
@@ -24,23 +25,19 @@ void Player::initPlayer(){
     toState(0);
 }
 
-Player::~Player()
-{
-
-}
-
-void Player::Update(float dt, Input& input, std::vector<Bullet*>& bullets)
+void Player::Update(float dt)
 {
     UpdateStateTime(dt);
     onExecute(m_currentState, dt);
 
-    //Shooting  
-    if (m_currentState == 0 && input.IsKeyDown(32))
+    if (m_currentState == 0 && m_input->IsKeyDown(32))
     {
         sf::Vector2f bulletPos(shape.getPosition());
         bulletPos.x -= shape.getSize().x / 2.f;
         bulletPos.y -= shape.getSize().y;
-        bullets.push_back(new Bullet(bulletPos));
+        Bullet* bul = new Bullet();
+        bul->initBullet(bulletPos);
+        m_bullets->push_back(bul);
     }
 }
 
@@ -69,76 +66,66 @@ void Player::onEnter(int id)
 
 void Player::onExecute(int id, float dt)
 {
-void Player::Update(float dt) {
-    float speed = 400.0f;
     sf::Vector2f movement(0.f, 0.f);
 
     if (id == 0 || id == 1)
     {
-        
+        //Moving Right
+        if (m_input->IsKey('D'))
+        {
+            movement.x += speed * dt;
+        }
+        if (m_input->IsKeyDown('D')) {
+            movement.x += speed * dt;
+        }
+
+        //Moving Left
+        if (m_input->IsKey('Q'))
+        {
+            movement.x -= speed * dt;
+        }
+        if (m_input->IsKeyDown('Q')) {
+            movement.x -= speed * dt;
+        }
+
+        //Moving Up
+        if (m_input->IsKey('Z'))
+        {
+            movement.y -= speed * dt;
+        }
+        if (m_input->IsKeyDown('Z')) {
+            movement.y -= speed * dt;
+        }
+
+        //Moving Down
+        if (m_input->IsKey('S'))
+        {
+            movement.y += speed * dt;
+        }
+        if (m_input->IsKeyDown('S')) {
+            movement.y += speed * dt;
+        }
+
+        shape.move(movement);
+
+        sf::Vector2f pos = shape.getPosition();
+        sf::Vector2f size = shape.getSize();
+
+        if (pos.x < 30) pos.x = 30;
+        if (pos.y < 550) pos.y = 550;
+        if (pos.x > 1250) pos.x = 1250;
+        if (pos.y > 700) pos.y = 700;
+
+        shape.setPosition(pos);
     }
-    else if (id == 2)
+
+    if (id == 1 && m_stateTime >= 1.0f)
     {
-        
+        toState(0);
     }
-}
-/*
-    //Moving Right
-    if (m_input->IsKey('D'))
+
+    if (id == 2 && m_stateTime >= 1.0f)
     {
-        movement.x += speed * dt;
-    }
-    if (m_input->IsKeyDown('D')) {
-        movement.x += speed * dt;
-    }
-
-    //Moving Left
-    if (m_input->IsKey('Q'))
-    {
-        movement.x -= speed * dt;
-    }
-    if (m_input->IsKeyDown('Q')) {
-        movement.x -= speed * dt;
-    }
-
-    //Moving Up
-    if (m_input->IsKey('Z'))
-    {
-        movement.y -= speed * dt;
-    }
-    if (m_input->IsKeyDown('Z')) {
-        movement.y -= speed * dt;
-    }
-
-    //Moving Down
-    if (m_input->IsKey('S'))
-    {
-        movement.y += speed * dt;
-    }
-    if (m_input->IsKeyDown('S')) {
-        movement.y += speed * dt;
-    }
-
-    shape.move(movement);
-
-    sf::Vector2f pos = shape.getPosition();
-    sf::Vector2f size = shape.getSize();
-
-    if (pos.x < 30) pos.x = 30;
-    if (pos.y < 550) pos.y = 550;
-    if (pos.x > 1250) pos.x = 1250;
-    if (pos.y > 700) pos.y = 700;
-
-    shape.setPosition(pos);
-}
-*/
-
-    //Shooting  
-    if (m_input->IsKeyDown(32))
-    {
-        sf::Vector2f bulletPos(pos.x - 5.f, pos.y - size.y);
-        Bullet* bul = new Bullet();
-        bul->initBullet(bulletPos);
-        m_bullets->push_back(bul);
+        shape.setFillColor(sf::Color::Transparent);
     }
 }
