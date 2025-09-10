@@ -20,22 +20,13 @@ public:
 
 	void Update(float dt) override;
 
-	private:
-		Input* m_input;
-		std::vector<Bullet*>* m_bullets;
-	~Player();
+private:
+	Input* m_input;
+	std::vector<Bullet*>* m_bullets;
 
 private:
 	//float speed = 0.f;
 
-public:
-	void Update(float dt, class Input& input, std::vector<Bullet*>& bullets) override;
-
-	//virtual void onExit(int id) = 0;
-
-	//virtual void onEnter(int id) = 0;
-
-	//virtual void onExecute(int id, float dt) = 0;
 };
 
 

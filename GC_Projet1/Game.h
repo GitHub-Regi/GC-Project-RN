@@ -13,18 +13,11 @@ public:
 	~Game();
 
 private:
-	
+	sf::RenderWindow window;
 	Timer m_timer;
 	Input* m_input;
 	std::vector<Bullet*>* m_bullets;
 	Player* m_player;
-
-private: 
-	sf::RenderWindow window;
-	Timer timer;
-	Input input;
-	Player player;
-	std::vector<Bullet*> bullets;
 
 public: 
 	void Run();
