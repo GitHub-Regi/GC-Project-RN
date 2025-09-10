@@ -17,6 +17,8 @@ void Game::Run()
     Input input;
     Player player;
 
+    std::vector<Bullet*> bullets;
+
     while (window.isOpen())
     {
 
@@ -26,11 +28,11 @@ void Game::Run()
                 window.close();
         }
 
-        std::vector<Bullet*> bullets;
+        
 
         timer.UpdateDeltaTime();
-        player.Update(timer.getDeltaTime(), input, bullets);
         input.update();
+        player.Update(timer.getDeltaTime(), input, bullets);
 
         //for (size_t i = 0)
 

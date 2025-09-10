@@ -1,24 +1,2 @@
-﻿  Bullet.cpp
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Entity.h(17,58): error C2065: 'Bullet' : identificateur non déclaré
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Entity.h(17,65): error C2059: erreur de syntaxe : '>'
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Bullet.h(14,7): error C3668: 'Bullet::Update' : la méthode comprenant le spécificateur de substitution 'override' n'a substitué aucune méthode de la classe de base
-  Entity.cpp
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Bullet.h(6,1): error C2504: 'Entity' : classe de base non définie
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Bullet.h(14,7): error C3668: 'Bullet::Update' : la méthode comprenant le spécificateur de substitution 'override' n'a substitué aucune méthode de la classe de base
-  Game.cpp
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Bullet.h(6,1): error C2504: 'Entity' : classe de base non définie
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Bullet.h(14,7): error C3668: 'Bullet::Update' : la méthode comprenant le spécificateur de substitution 'override' n'a substitué aucune méthode de la classe de base
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Game.cpp(18,5): error C2065: 'Player' : identificateur non déclaré
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Game.cpp(18,12): error C2146: erreur de syntaxe : absence de ';' avant l'identificateur 'player'
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Game.cpp(18,12): error C2065: 'player' : identificateur non déclaré
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Game.cpp(32,9): error C2065: 'player' : identificateur non déclaré
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Game.cpp(38,9): error C2065: 'player' : identificateur non déclaré
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Game.cpp(39,35): error C2039: 'Draw' n'est pas membre de 'Bullet'
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Bullet.h(5,7): message : voir la déclaration de 'Bullet'
-  GC_Projet1.cpp
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Bullet.h(6,1): error C2504: 'Entity' : classe de base non définie
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Bullet.h(14,7): error C3668: 'Bullet::Update' : la méthode comprenant le spécificateur de substitution 'override' n'a substitué aucune méthode de la classe de base
-  Player.cpp
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Bullet.h(6,1): error C2504: 'Entity' : classe de base non définie
-C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Bullet.h(14,7): error C3668: 'Bullet::Update' : la méthode comprenant le spécificateur de substitution 'override' n'a substitué aucune méthode de la classe de base
-  Génération de code en cours...
+﻿  Player.cpp
+  GC_Projet1.vcxproj -> C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\x64\Debug\GC_Projet1.exe

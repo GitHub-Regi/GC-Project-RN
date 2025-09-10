@@ -51,8 +51,8 @@ void Player::Update(float dt, Input& input, std::vector<Bullet*>& bullets)
 
     shape.move(movement);
 
-    sf::Vector2 pos = shape.getPosition();
-    sf::Vector2 size = shape.getSize();
+    sf::Vector2f pos = shape.getPosition();
+    sf::Vector2f size = shape.getSize();
 
     if (pos.x < 30) pos.x = 30;
     if (pos.y < 550) pos.y = 550;
@@ -62,9 +62,9 @@ void Player::Update(float dt, Input& input, std::vector<Bullet*>& bullets)
     shape.setPosition(pos);
 
     //Shooting  
-    if (input.IsKey(32))
+    if (input.IsKeyDown(32))
     {
-        sf::Vector2f bulletPos(pos.x + size.x, 0.f);
+        sf::Vector2f bulletPos(pos.x, pos.y + size.y);
         bullets.push_back(new Bullet(bulletPos));
     }
 }

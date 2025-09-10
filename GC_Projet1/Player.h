@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "Entity.h"
+#include "Input.h"
 #include "Bullet.h"
 
 

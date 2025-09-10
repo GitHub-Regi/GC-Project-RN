@@ -1,12 +1,12 @@
 #pragma once
 
-#include <SFMl/graphics.hpp>
+#include <SFMl/Graphics.hpp>
 #include <vector>
-#include "Input.h"
-#include "State.h"
-#include "Bullet.h"
 
-class Entity : public State
+class Input;
+class Bullet;
+
+class Entity 
 {
 protected:
 	sf::RectangleShape shape;

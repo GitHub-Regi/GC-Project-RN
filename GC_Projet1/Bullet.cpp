@@ -10,6 +10,6 @@ Bullet::Bullet(sf::Vector2f position)
 
 void Bullet::Update(float dt, class Input& input, std::vector<Bullet*>& bullets)
 {
-	shape.move(sf::Vector2f(0.f, speed * dt));
+	shape.move(sf::Vector2f(0.f, -speed * dt));
 	
 }
