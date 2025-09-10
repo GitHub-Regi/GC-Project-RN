@@ -2,11 +2,9 @@
 
 #include <SFMl/Graphics.hpp>
 #include <vector>
+#include "State.h"
 
-class Input;
-class Bullet;
-
-class Entity 
+class Entity : public State
 {
 protected:
 	sf::RectangleShape shape;

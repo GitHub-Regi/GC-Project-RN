@@ -4,10 +4,8 @@
 #include "Entity.h"
 #include "Input.h"
 #include "Bullet.h"
-//#include "State.h"
 
-
-class Player : public Entity//, public State
+class Player : public Entity
 {
 public:
 	Player();

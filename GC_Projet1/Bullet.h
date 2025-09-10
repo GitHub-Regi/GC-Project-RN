@@ -1,9 +1,9 @@
 #pragma once
 
 #include "Entity.h"
-#include "State.h"
 
-class Bullet : public Entity, public State
+
+class Bullet : public Entity
 {
 public :
 	//Bullet(sf::Vector2f position);
