@@ -61,8 +61,8 @@ void Player::onExecute(int id, float dt)
     if (id == 0 && m_input->IsKeyDown(32))
     {
         sf::Vector2f bulletPos = shape.getPosition();
-        bulletPos.y -= shape.getSize().y / 2;
-        bulletPos.x -= 25;
+        bulletPos.y -= shape.getSize().y;
+        bulletPos.x -= 5;
 
         Bullet* bul = new Bullet();
         bul->initBullet(bulletPos);
@@ -71,7 +71,7 @@ void Player::onExecute(int id, float dt)
 
     if (id == 0 && m_input->IsKeyDown('P'))
     {
-        currentHealth -= 20.f;
+        currentHealth -= 100.f;
 
         if (currentHealth <= 0.f)
         {

@@ -11,7 +11,7 @@ Enemy::~Enemy()
 void Enemy::initEnemy(int spawnX, int spawnY, int pattern)
 {
     shape.setSize(sf::Vector2f(30, 50));
-    shape.setOrigin({ 15.f, 50.f }); //modifie le point d'origine de la forme (ici au milieu bas)
+    shape.setOrigin({ 0.f, 0.f }); //modifie le point d'origine de la forme (ici au milieu bas)
     shape.setFillColor(sf::Color::Magenta);
     //Random this
     shape.setPosition({ float(spawnX) , float(spawnY) }); 
@@ -65,7 +65,7 @@ void Enemy::onEnter(int id)
     }
     else if (id == 2)
     {
-        shape.setFillColor(sf::Color::Red);
+        //shape.setFillColor(sf::Color::Red);
     }
 }
 
