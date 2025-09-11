@@ -1,11 +1,14 @@
 #pragma once
 
 #include "Entity.h"
+#include "Collision.h"
 
 class Enemy : public Entity
 {
 public: 
 	Enemy();
+
+	Enemy(std::vector<Bullet*>* bullets);
 
 	virtual ~Enemy();
 
@@ -23,5 +26,6 @@ private:
 	float m_speed;
 	int m_pattern;
 	sf::Vector2f m_goal;
+	std::vector<Bullet*>* m_bullets;
 };
 

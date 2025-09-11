@@ -4,7 +4,7 @@
 #include "Bullet.h"
 #include "Enemy.h"
 
-class Collision : Entity
+class Collision 
 {
 
 public: 
@@ -12,10 +12,7 @@ public:
 
 	virtual ~Collision();
 
-	void Update(float dt) override;
-
-private:
-	bool IsColliding(const sf::RectangleShape& a, const sf::RectangleShape& b);
+	static bool IsColliding(const sf::RectangleShape& a, const sf::RectangleShape b);
 	
 };
 

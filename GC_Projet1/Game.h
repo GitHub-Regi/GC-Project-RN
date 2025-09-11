@@ -5,6 +5,8 @@
 #include "Timer.h"
 #include "Bullet.h"
 #include "EnemiesManager.h"
+#include "Collision.h"
+#include "Enemy.h"
 
 class Game : public State
 {

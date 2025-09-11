@@ -16,6 +16,9 @@ void Enemy::initEnemy(int spawnX, int spawnY, int pattern)
     //Random this
     shape.setPosition({ float(spawnX) , float(spawnY) }); 
     m_speed = 200.f;
+
+    currentHealth = maxHealth;
+
     m_pattern = pattern;
     if (m_pattern == 0) { //line
         m_goal.x = 1200;
@@ -90,9 +93,10 @@ void Enemy::onExecute(int id, float dt)
     }
     else if (id == 1) //alive
     {
+
         //Moving
         if (m_pattern == 0) {
-            sf::Vector2f movement(0.f, 0.f);
+            /*sf::Vector2f movement(0.f, 0.f);
             if (shape.getPosition().x != m_goal.x && m_goal.x > 640) {
                 movement.x += m_speed * dt;
             }
@@ -112,7 +116,7 @@ void Enemy::onExecute(int id, float dt)
             if (pos.x < 80) pos.x = 80;
             if (pos.x > 1200) pos.x = 1200;
 
-            shape.setPosition(pos);
+            shape.setPosition(pos);*/
         }
         else if (m_pattern == 1) {
             sf::Vector2f movement(0.f, 0.f);
@@ -142,9 +146,6 @@ void Enemy::onExecute(int id, float dt)
     }
     else if (id == 2) //dead
     {
-        if (m_stateTime > 0.5f)//changer la condition si collision avec un missile du joueur
-        {
-            toState(1);
-        }
+        shape.setFillColor(sf::Color::Transparent);
     }
 }

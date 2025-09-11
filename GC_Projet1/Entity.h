@@ -28,7 +28,7 @@ public:
 
 	sf::Vector2f GetPos() const { return shape.getPosition(); }
 	sf::Vector2f GetSize() const { return shape.getSize(); }
-	int GetArea(sf::RectangleShape shape) const { return shape.getSize().x * shape.getSize().y; }
+	const sf::RectangleShape& GetShape() const { return shape; }
 	float GetCurrentHealth() const { return currentHealth; }
 };
 

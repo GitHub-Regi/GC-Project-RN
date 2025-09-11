@@ -10,19 +10,12 @@ Collision::~Collision()
 
 }
 
-void Collision::Update(float dt)
+bool Collision::IsColliding(const sf::RectangleShape& a, const sf::RectangleShape b)
 {
-    UpdateStateTime(dt);
-    onExecute(m_currentState, dt);
-}
-
-
-bool IsColliding(const Entity& a, const Entity& b)
-{
-    sf::Vector2f posA = a.GetPos();
-    sf::Vector2f sizeA = a.GetSize();
-    sf::Vector2f posB = a.GetPos();
-    sf::Vector2f sizeB = b.GetSize();
+    sf::Vector2f posA = a.getPosition();
+    sf::Vector2f sizeA = a.getSize();
+    sf::Vector2f posB = b.getPosition();
+    sf::Vector2f sizeB = b.getSize();
 
     float leftA = posA.x;
     float rightA = posA.x + sizeA.x;
