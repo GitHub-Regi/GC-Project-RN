@@ -11,7 +11,7 @@ Enemy::~Enemy()
 void Enemy::initEnemy(int spawnX, int spawnY, int pattern)
 {
     shape.setSize(sf::Vector2f(30, 50));
-    shape.setOrigin({ 15.f, 50.f }); //modifie le point d'origine de la forme (ici au milieu bas)
+    shape.setOrigin({ 0.f, 0.f }); //modifie le point d'origine de la forme (ici au milieu bas)
     shape.setFillColor(sf::Color::Magenta);
     //Random this
     shape.setPosition({ float(spawnX) , float(spawnY) }); 
@@ -25,7 +25,7 @@ void Enemy::initEnemy(int spawnX, int spawnY, int pattern)
         m_goal.y = 60;
     }
     else if (m_pattern == 1) { //half circle
-        m_goal.x = 640;
+        m_goal.x = 625;
         m_goal.y = 500;
     }
     else {
@@ -96,7 +96,7 @@ void Enemy::onExecute(int id, float dt)
 
         //Moving
         if (m_pattern == 0) {
-            /*sf::Vector2f movement(0.f, 0.f);
+            sf::Vector2f movement(0.f, 0.f);
             if (shape.getPosition().x != m_goal.x && m_goal.x > 640) {
                 movement.x += m_speed * dt;
             }
@@ -116,13 +116,13 @@ void Enemy::onExecute(int id, float dt)
             if (pos.x < 80) pos.x = 80;
             if (pos.x > 1200) pos.x = 1200;
 
-            shape.setPosition(pos);*/
+            shape.setPosition(pos);
         }
         else if (m_pattern == 1) { //pattern half circle
             sf::Vector2f movement(0.f, 0.f);
 
             if (shape.getPosition().x != m_goal.x) {
-                if (m_goal.x == 640){
+                if (m_goal.x == 625){
                     movement.x += m_speed * dt;
                     movement.y += m_speed / 1.8f * dt;
                 }
@@ -137,14 +137,14 @@ void Enemy::onExecute(int id, float dt)
 
             shape.move(movement);
             
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 640) {
+            if (shape.getPosition().x == m_goal.x && m_goal.x == 625) {
                 m_goal.x = 1200;
             }
             if (shape.getPosition().x == m_goal.x && m_goal.x == 1200) {
                 m_goal.x = 80;
             }
             if (shape.getPosition().x == m_goal.x && m_goal.x == 80) {
-                m_goal.x = 640;
+                m_goal.x = 625;
             }
 
             
@@ -152,7 +152,7 @@ void Enemy::onExecute(int id, float dt)
             sf::Vector2f pos = shape.getPosition();
             if (pos.x < 80) pos.x = 80;
             if (pos.x > 1200) pos.x = 1200;
-            if (pos.x > 638 && pos.x < 642) pos.x = 640;
+            if (pos.x > 623 && pos.x < 627) pos.x = 625;
             if (pos.y < 60) pos.y = 60;
             if (pos.y > 500) pos.y = 500;
 
