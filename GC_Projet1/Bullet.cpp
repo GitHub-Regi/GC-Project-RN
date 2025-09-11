@@ -13,13 +13,12 @@ void Bullet::initBullet(sf::Vector2f position)
 	shape.setSize(sf::Vector2f(10, 20));
 	shape.setFillColor(sf::Color::Blue);
 	shape.setPosition(position);
-	speed = 400.f;
+	
+	toState(0);
 }
 
 void Bullet::Update(float dt)
-{
-	shape.move(sf::Vector2f(0.f, -speed * m_dt));
-	
+{	
 	UpdateStateTime(dt);
 	onExecute(m_currentState, dt);
 }
@@ -54,7 +53,7 @@ void Bullet::onExecute(int id, float dt)
 	{
 		shape.move(sf::Vector2f(0.f, -speed * dt));
 
-		if (shape.getPosition().y + shape.getSize().y < 0)
+		if (shape.getPosition().y + shape.getSize().y < 100)
 		{
 			toState(1);
 		}
@@ -68,6 +67,6 @@ void Bullet::onExecute(int id, float dt)
 	}
 	else if (id == 2)
 	{
-		this->~Bullet();
+		//destruction dans game
 	}
 }
