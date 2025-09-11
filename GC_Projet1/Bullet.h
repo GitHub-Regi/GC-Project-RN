@@ -6,8 +6,9 @@
 class Bullet : public Entity
 {
 public :
-	//Bullet(sf::Vector2f position);
 	Bullet();
+
+	~Bullet();
 
 private:
 	float speed;

@@ -13,8 +13,8 @@ Game::Game()
     : window(sf::VideoMode({ 1280, 720 }), "SFML works!")
 {
     m_input = new Input();
-    //m_bullets = new std::vector<Bullet*>;
-    //m_player = new Player(m_input, m_bullets);
+    m_bullets = nullptr;
+    m_player = nullptr;
     toState(0);
 }
 
@@ -23,14 +23,11 @@ Game::~Game()
     delete m_input;
     delete m_bullets;
     delete m_player;
-    //for (auto b : bullets) delete b;
 }
 
 void Game::Run()
 {
     window.setFramerateLimit(60);
-
-    //m_player->initPlayer();
 
     while (window.isOpen())
     {
@@ -45,7 +42,6 @@ void Game::Run()
         float dt = m_timer.getDeltaTime();
         m_timer.UpdateDeltaTime();
         m_input->update();
-        //m_player->Update(dt);
 
         UpdateStateTime(dt);
         onExecute(m_currentState, dt);
@@ -76,18 +72,13 @@ void Game::onEnter(int id)
     }
     else if (id == 1)
     {
-        //player = Player();
-
-        //for (auto b : bullets) delete b;
-        //bullets.clear();
-
         m_bullets = new std::vector<Bullet*>;
         m_player = new Player(m_input, m_bullets);
         m_player->initPlayer();
     }
     else if (id == 2)
     {
-        
+      
     }
 }
 

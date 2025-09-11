@@ -1,9 +1,8 @@
 #pragma once
 
 #include "Entity.h"
-#include "State.h"
 
-class Enemy : public Entity//, public State
+class Enemy : public Entity
 {
 public: 
 	Enemy();
@@ -23,5 +22,6 @@ public:
 private: 
 	int m_Posx;
 	int m_Posy;
+	float m_speed;
 };
 
