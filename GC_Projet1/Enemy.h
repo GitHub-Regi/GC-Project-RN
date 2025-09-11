@@ -9,7 +9,7 @@ public:
 
 	virtual ~Enemy();
 
-	void initEnemy();
+	void initEnemy(int spawnX, int spawnY, int pattern);
 
 	void Update(float dt) override;
 
@@ -21,6 +21,7 @@ public:
 
 private: 
 	float m_speed;
-	int m_goal;
+	int m_pattern;
+	sf::Vector2f m_goal;
 };
 
