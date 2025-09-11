@@ -4,6 +4,9 @@
 #include <vector>
 #include "State.h"
 
+class Input;
+class Bullet;
+
 class Entity : public State
 {
 protected:

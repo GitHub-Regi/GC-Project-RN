@@ -2,7 +2,6 @@
 
 #include "Entity.h"
 
-
 class Bullet : public Entity
 {
 public :
