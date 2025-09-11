@@ -4,6 +4,7 @@
 #include "Input.h"
 #include "Timer.h"
 #include "Bullet.h"
+#include "EnemiesManager.h"
 
 class Game : public State
 {
@@ -15,6 +16,7 @@ public:
 private:
 	sf::RenderWindow window;
 	Timer m_timer;
+	EnemiesManager m_enemiesManager;
 	Input* m_input;
 	std::vector<Bullet*>* m_bullets;
 	Player* m_player;

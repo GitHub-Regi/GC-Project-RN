@@ -75,6 +75,7 @@ void Game::onEnter(int id)
         m_bullets = new std::vector<Bullet*>;
         m_player = new Player(m_input, m_bullets);
         m_player->initPlayer();
+        m_enemiesManager.initEnemies(3, 0);
     }
     else if (id == 2)
     {
@@ -105,6 +106,7 @@ void Game::onExecute(int id, float dt)
     else if (id == 1)
     {
         m_player->Update(dt);
+        m_enemiesManager.updateEnemies(dt);
 
         for (Bullet* b: (*m_bullets))
         {
@@ -130,6 +132,7 @@ void Game::onExecute(int id, float dt)
         }
 ;       
         m_player->Draw(window);
+        m_enemiesManager.drawEnemies(window);
         for (Bullet* b : (*m_bullets)) b->Draw(window);
 
         if (m_player->GetState() == 2)
