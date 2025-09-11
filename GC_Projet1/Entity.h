@@ -28,6 +28,7 @@ public:
 
 	sf::Vector2f GetPos() const { return shape.getPosition(); }
 	sf::Vector2f GetSize() const { return shape.getSize(); }
+	const sf::RectangleShape& GetShape() const { return shape; }
 	float GetCurrentHealth() const { return currentHealth; }
 };
 

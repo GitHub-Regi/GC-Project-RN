@@ -53,10 +53,10 @@ void Bullet::onExecute(int id, float dt)
 	{
 		shape.move(sf::Vector2f(0.f, -speed * dt));
 
-		if (shape.getPosition().y + shape.getSize().y < 100)
+		/*if (shape.getPosition().y + shape.getSize().y < 100)
 		{
 			toState(1);
-		}
+		}*/
 	}
 	else if (id == 1)
 	{
