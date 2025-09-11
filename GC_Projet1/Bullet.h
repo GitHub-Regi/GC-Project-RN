@@ -8,8 +8,6 @@ public :
 	Bullet();
 	~Bullet();
 
-	~Bullet();
-
 private:
 	float speed = 400.f;
 
