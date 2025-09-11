@@ -65,7 +65,7 @@ void Enemy::onEnter(int id)
     }
     else if (id == 2)
     {
-        shape.setFillColor(sf::Color::Red);
+        //shape.setFillColor(sf::Color::Red);
     }
 }
 

@@ -76,7 +76,7 @@ void Game::onEnter(int id)
         m_bullets = new std::vector<Bullet*>;
         m_player = new Player(m_input, m_bullets);
         m_player->initPlayer();
-        m_enemiesManager.initEnemies(1, 0);
+        m_enemiesManager.initEnemies(10, 1);
     }
     else if (id == 2)
     {
@@ -119,11 +119,10 @@ void Game::onExecute(int id, float dt)
                 {
                     if (Collision::IsColliding(e->GetShape(), b->GetShape()))
                     {
-                        float enemyHealth = e->GetCurrentHealth();
-                        enemyHealth -= 20.f;
+                        e->SetCurrentHealth(-20);
                         b->toState(1);
 
-                        if (enemyHealth <= 0.f)
+                        if (e->GetCurrentHealth() <= 0.f)
                         {
                             e->toState(2);
                         }

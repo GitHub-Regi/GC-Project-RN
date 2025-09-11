@@ -30,5 +30,6 @@ public:
 	sf::Vector2f GetSize() const { return shape.getSize(); }
 	const sf::RectangleShape& GetShape() const { return shape; }
 	float GetCurrentHealth() const { return currentHealth; }
+	void SetCurrentHealth(float damage) { currentHealth += damage; }
 };
 
