@@ -132,7 +132,7 @@ void Game::onExecute(int id, float dt)
         for (Bullet* b : (*m_bullets)) b->Draw(window);
 ;
 
-        if (m_player->GetPos().x + m_player->GetSize().x < 100)
+        if (m_player->GetCurrentHealth() <= 0.f && m_stateTime >= 1.f)
         {
             toState(2);
         }

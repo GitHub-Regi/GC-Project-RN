@@ -9,6 +9,9 @@ class Entity : public State
 protected:
 	sf::RectangleShape shape;
 
+	float maxHealth = 100.f;
+	float currentHealth;
+
 public:
 	Entity();
 
@@ -22,6 +25,6 @@ public:
 
 	sf::Vector2f GetPos() const { return shape.getPosition(); }
 	sf::Vector2f GetSize() const { return shape.getSize(); }
-
+	float GetCurrentHealth() const { return currentHealth; }
 };
 

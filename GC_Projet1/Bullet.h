@@ -7,12 +7,12 @@ class Bullet : public Entity
 {
 public :
 	Bullet();
+	~Bullet();
 
 	~Bullet();
 
 private:
-	float speed;
-	float m_dt;
+	float speed = 400.f;
 
 public:
 	void initBullet(sf::Vector2f position);
