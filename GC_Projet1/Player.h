@@ -7,7 +7,7 @@
 #include "State.h"
 
 
-class Player : public Entity, public State
+class Player : public Entity
 {
 public:
 	Player();

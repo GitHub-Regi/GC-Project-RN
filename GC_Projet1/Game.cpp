@@ -56,7 +56,7 @@ void Game::onExit(int id)
     }
     else if (id == 1)
     {
-        
+        m_bullets->clear();
     }
     else if (id == 2)
     {
@@ -84,6 +84,8 @@ void Game::onEnter(int id)
 
 void Game::onExecute(int id, float dt)
 {
+    window.clear();
+
     if (id == 0)
     {
         sf::Font font;
@@ -108,10 +110,10 @@ void Game::onExecute(int id, float dt)
         {
             b->Update(dt);
 
-            if (b->GetPos().y + b->GetSize().y < 0)
+            /*if (b->GetPos().y + b->GetSize().y < 0)
             {
                 b->toState(2);
-            }
+            }*/
         }
 
         for (auto it = (*m_bullets).begin(); it != (*m_bullets).end();)
@@ -127,14 +129,15 @@ void Game::onExecute(int id, float dt)
             }
         }
 ;       
-        window.clear();
         m_player->Draw(window);
         for (Bullet* b : (*m_bullets)) b->Draw(window);
-;
 
-        if (m_player->GetCurrentHealth() <= 0.f && m_stateTime >= 1.f)
+        if (m_player->GetState() == 2)
         {
-            toState(2);
+            if (m_player->GetStateTime() >= 1.0f)
+            {
+                toState(2);
+            }
         }
         
     }

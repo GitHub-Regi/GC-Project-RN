@@ -30,32 +30,7 @@ void Player::initPlayer(){
 void Player::Update(float dt)
 {
     UpdateStateTime(dt);
-    onExecute(m_currentState, dt);
-
-    if (m_currentState == 0 && m_input->IsKeyDown(32))
-    {
-        sf::Vector2f bulletPos(shape.getPosition());
-        bulletPos.x -= shape.getOrigin().x;
-        bulletPos.y -= shape.getOrigin().y;
-        Bullet* bul = new Bullet();
-        bul->initBullet(bulletPos);
-        m_bullets->push_back(bul);
-    }
-
-    if (m_currentState == 0 && m_input->IsKeyDown('P'))
-    {
-        if (currentHealth <= 0.f)
-        {
-            toState(2);
-        }
-        else
-        {
-            toState(1);
-            currentHealth -= 20.f;
-        }
-
-    }
-    
+    onExecute(m_currentState, dt);   
 }
 
 void Player::onExit(int id)
@@ -83,6 +58,32 @@ void Player::onEnter(int id)
 
 void Player::onExecute(int id, float dt)
 {
+    if (id == 0 && m_input->IsKeyDown(32))
+    {
+        sf::Vector2f bulletPos = shape.getPosition();
+        bulletPos.y -= shape.getSize().y / 2;
+        bulletPos.x -= 25;
+
+        Bullet* bul = new Bullet();
+        bul->initBullet(bulletPos);
+        m_bullets->push_back(bul);
+    }
+
+    if (id == 0 && m_input->IsKeyDown('P'))
+    {
+        currentHealth -= 20.f;
+
+        if (currentHealth <= 0.f)
+        {
+            toState(2);
+        }
+        else
+        {
+            toState(1);
+
+        }
+    }
+
     sf::Vector2f movement(0.f, 0.f);
 
     if (id == 0 || id == 1)
@@ -143,7 +144,6 @@ void Player::onExecute(int id, float dt)
 
     if (id == 2 && m_stateTime >= 1.0f)
     {
-        shape.setFillColor(sf::Color::Transparent);
-        //this->~Player();
+        //Destruction du joueur dans Game
     }
 }

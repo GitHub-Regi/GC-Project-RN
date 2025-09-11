@@ -18,6 +18,8 @@ class State
 
 		int GetState() const { return m_currentState; }
 
+		float GetStateTime() const { return m_stateTime; }
+
 		virtual void onExit(int id) = 0;
 
 		virtual void onEnter(int id) = 0;
