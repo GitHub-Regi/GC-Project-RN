@@ -20,8 +20,7 @@ public:
 	void onExecute(int id, float dt) override;
 
 private: 
-	int m_Posx;
-	int m_Posy;
 	float m_speed;
+	int m_goal;
 };
 

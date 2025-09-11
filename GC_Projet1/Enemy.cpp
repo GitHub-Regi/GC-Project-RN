@@ -16,26 +16,15 @@ void Enemy::initEnemy()
     //Random this
     shape.setPosition({ 40.f, 60.f }); 
     m_speed = 200.f;
+    m_goal = 1200;
+
+    toState(0);
 }
 
 void Enemy::Update(float dt)
 {   
-    //Moving
-    sf::Vector2f movement(0.f, 0.f);
-    //movement.x += m_speed * dt;
-    shape.move(movement);
-
-    sf::Vector2f pos = shape.getPosition();
-    sf::Vector2f size = shape.getSize();
-
-    if (pos.x < 30) pos.x = 30;
-    if (pos.y < 550) pos.y = 550;
-    if (pos.x > 1250) pos.x = 1250;
-    if (pos.y > 700) pos.y = 700;
-
-    shape.setPosition(pos);
-
-    //shooting
+    UpdateStateTime(dt);
+    onExecute(m_currentState, dt);
 }
 
 void Enemy::onExit(int id)
@@ -65,8 +54,25 @@ void Enemy::onEnter(int id)
 void Enemy::onExecute(int id, float dt)
 {
     if (id == 0)
-    {
-        shape.move(sf::Vector2f(0.f, -m_speed * dt));
+    { 
+        //Moving
+        sf::Vector2f movement(0.f, 0.f);
+        if (shape.getPosition().x != m_goal  && m_goal > 640) {
+            if (shape.getPosition().x == m_goal) {
+                m_goal = 80;
+            }
+            movement.x += m_speed * dt;
+        }
+        if (shape.getPosition().x != m_goal && m_goal < 640) {
+            if (shape.getPosition().x == m_goal) {
+                m_goal = 1200;
+            }
+            movement.x -= m_speed * dt;
+        }
+        shape.move(movement);
+
+        //shooting
+
     }
     else if (id == 1)
     {
