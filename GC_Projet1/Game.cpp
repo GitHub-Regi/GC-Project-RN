@@ -57,6 +57,7 @@ void Game::onExit(int id)
     else if (id == 1)
     {
         m_bullets->clear();
+        m_enemiesManager.m_enemies.clear();
     }
     else if (id == 2)
     {
@@ -75,7 +76,7 @@ void Game::onEnter(int id)
         m_bullets = new std::vector<Bullet*>;
         m_player = new Player(m_input, m_bullets);
         m_player->initPlayer();
-        m_enemiesManager.initEnemies(3, 0);
+        m_enemiesManager.initEnemies(10, 1);
     }
     else if (id == 2)
     {

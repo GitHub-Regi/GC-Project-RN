@@ -17,7 +17,7 @@ Player::~Player()
 
 void Player::initPlayer(){
     shape.setSize(sf::Vector2f(40, 70));
-    shape.setOrigin({ 40.f, 35.f });
+    shape.setOrigin({ 20.f, 70.f });
     shape.setFillColor(sf::Color::Green);
     shape.setPosition({ 640.f, 650.f });
     speed = 350.f;
