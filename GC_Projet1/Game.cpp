@@ -132,7 +132,7 @@ void Game::onExecute(int id, float dt)
                 {
                     if (Collision::IsColliding((*m_enemiesManager.m_enemies[i]).GetShape(), b->GetShape()))
                     {
-                        (*m_enemiesManager.m_enemies[i]).SetCurrentHealth(-20);
+                        (*m_enemiesManager.m_enemies[i]).SetCurrentHealth(-40);
                         b->toState(1);
                         (*m_enemiesManager.m_enemies[i]).toState(2);
 

@@ -21,10 +21,7 @@ public:
 	virtual ~Entity() = default;
 
 	virtual void Update(float dt) = 0;
-	virtual void Draw(sf::RenderWindow& window)
-	{
-		window.draw(shape);
-	}
+	virtual void Draw(sf::RenderWindow& window) { window.draw(shape); }
 
 	sf::Vector2f GetPos() const { return shape.getPosition(); }
 	sf::Vector2f GetSize() const { return shape.getSize(); }

@@ -28,7 +28,7 @@ private:
 	//std::vector<Bullet*>* m_bullets;
 
 	float m_fireCooldown = 0.f;
-	float m_fireRate = 1.f;
+	float m_fireRate = 1.5f;
 
 	EnemiesManager* enemiesManager;
 };
