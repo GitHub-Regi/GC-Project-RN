@@ -6,7 +6,6 @@ Input::Input()
 	for (int i = 0; i < 256; i++) {
 		m_tabKey[i] = neutral;
 	}
-	
 }
 
 Input::~Input()
@@ -19,7 +18,6 @@ bool Input::IsKey(int key)
 		return true;
 	}
 	return false;
-	
 }
 
 bool Input::IsKeyDown(int key)

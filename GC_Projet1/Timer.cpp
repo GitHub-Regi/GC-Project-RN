@@ -5,11 +5,6 @@ Timer::Timer()
 	lastTime = timeGetTime();
 }
 
-void Timer::Reset()
-{
-	lastTime = timeGetTime();
-}
-
 void Timer::UpdateDeltaTime()
 {
 	DWORD currentTime = timeGetTime();

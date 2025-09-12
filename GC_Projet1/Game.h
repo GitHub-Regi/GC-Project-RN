@@ -16,12 +16,18 @@ public:
 	~Game();
 
 private:
+	EnemiesManager m_enemiesManager;
 	sf::RenderWindow window;
 	Timer m_timer;
-	EnemiesManager m_enemiesManager;
 	Input* m_input;
-	std::vector<Bullet*>* m_bullets;
 	Player* m_player;
+	std::vector<Bullet*>* m_bullets;
+
+	float introTextPositionX = 380.f;
+	float introTextPositionY = 310.f;
+	float outroTextPositionX = 380.f;
+	float outroTextPositionY = 210.f;
+	sf::Color textColor = sf::Color::Red;
 
 public: 
 	void Run();

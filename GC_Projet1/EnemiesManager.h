@@ -13,10 +13,14 @@ public:
 
 	~EnemiesManager();
 
-	void initEnemies(int nbEnemies, int pattern);
+private: 
+	int m_nbEnemies;
 
+public:
 	std::vector<Enemy*> m_enemies;
 	std::vector<Bullet*> m_enemyBullets;
+
+	void initEnemies(int nbEnemies, int pattern);
 
 	void updateEnemies(float dt);
 
@@ -27,9 +31,6 @@ public:
 	void UpdateBullets(float dt);
 
 	void DrawEnemyBullets(sf::RenderWindow& w);
-
-private: 
-	int m_nbEnemies;
 
 };
 
