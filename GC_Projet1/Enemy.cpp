@@ -65,7 +65,7 @@ void Enemy::onEnter(int id)
     }
     else if (id == 2)
     {
-        //shape.setFillColor(sf::Color::Red);
+        shape.setFillColor(sf::Color::Transparent);
     }
 }
 
@@ -163,6 +163,6 @@ void Enemy::onExecute(int id, float dt)
     }
     else if (id == 2) //dead
     {
-        shape.setFillColor(sf::Color::Transparent);
+        
     }
 }

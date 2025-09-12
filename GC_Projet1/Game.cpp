@@ -125,6 +125,8 @@ void Game::onExecute(int id, float dt)
                         if (e->GetCurrentHealth() <= 0.f)
                         {
                             e->toState(2);
+                            delete e;
+                            //m_enemiesManager.m_enemies.erase(m_enemiesManager.m_enemies.begin() + m_enemiesManager.m_enemies[e]);
                         }
                     }
                 }
