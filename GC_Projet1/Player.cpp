@@ -40,15 +40,15 @@ void Player::onExit(int id)
 
 void Player::onEnter(int id)
 {
-    if (id == 0)
+    if (id == alive)
     {
         shape.setFillColor(sf::Color(34, 139, 34, 255));
     }
-    else if (id == 1)
+    else if (id == touched)
     {
         shape.setFillColor(sf::Color(255, 215, 0, 255));
     }
-    else if (id == 2)
+    else if (id == dead)
     {
         shape.setFillColor(sf::Color::Red);
     }
@@ -58,7 +58,7 @@ void Player::onEnter(int id)
 
 void Player::onExecute(int id, float dt)
 {
-    if (id == 0 && m_input->IsKeyDown(32))
+    if (id == alive && m_input->IsKeyDown(32))
     {
         sf::Vector2f bulletPos = shape.getPosition();
         bulletPos.y -= shape.getSize().y / 4;
@@ -70,7 +70,7 @@ void Player::onExecute(int id, float dt)
         bul->SetSpeed(400.f);
     }
 
-    if (id == 0 && m_input->IsKeyDown('P'))
+    if (id == alive && m_input->IsKeyDown('P'))
     {
         currentHealth -= 100.f;
 
@@ -87,7 +87,7 @@ void Player::onExecute(int id, float dt)
 
     sf::Vector2f movement(0.f, 0.f);
 
-    if (id == 0 || id == 1)
+    if (id == alive || id == touched)
     {
         //Moving Right
         if (m_input->IsKey('D'))
@@ -138,12 +138,12 @@ void Player::onExecute(int id, float dt)
         shape.setPosition(pos);
     }
 
-    if (id == 1 && m_stateTime >= 1.0f)
+    if (id == touched && m_stateTime >= 1.0f)
     {
         toState(0);
     }
 
-    if (id == 2 && m_stateTime >= 1.0f)
+    if (id == dead && m_stateTime >= 1.0f)
     {
         //Destruction du joueur dans Game
     }

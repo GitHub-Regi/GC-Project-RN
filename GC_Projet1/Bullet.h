@@ -11,6 +11,11 @@ public :
 private:
 	float speed = 0.f;
 
+	enum StateNames {
+		moving = 0,
+		explodes
+	};
+
 public:
 	void initBullet(sf::Vector2f position, sf::Color color);
 

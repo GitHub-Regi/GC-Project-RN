@@ -23,6 +23,12 @@ private:
 	std::vector<Bullet*>* m_bullets;
 	Player* m_player;
 
+	enum StateNames {
+		menu = 0,
+		game,
+		gameOver
+	};
+
 public: 
 	void Run();
 

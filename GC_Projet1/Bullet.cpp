@@ -25,11 +25,11 @@ void Bullet::Update(float dt)
 
 void Bullet::onExit(int id)
 {
-	if (id == 0)
+	if (id == moving)
 	{
 		//Fin du mouvement
 	}
-	else if (id == 1)
+	else if (id == explodes)
 	{
 		//Fin de l'explosion
 	}
@@ -37,11 +37,11 @@ void Bullet::onExit(int id)
 
 void Bullet::onEnter(int id)
 {
-	if (id == 0)
+	if (id == moving)
 	{
 		//Pret a avancer
 	}
-	else if (id == 1)
+	else if (id == explodes)
 	{
 		shape.setFillColor(sf::Color::Red);
 	}
@@ -49,19 +49,15 @@ void Bullet::onEnter(int id)
 
 void Bullet::onExecute(int id, float dt)
 {
-	if (id == 0)
+	if (id == moving)
 	{
 		shape.move(sf::Vector2f(0.f, speed * dt));
 	}
-	else if (id == 1)
+	else if (id == explodes)
 	{
 		if (m_stateTime >= 0.05f)
 		{
 			toState(2);
 		}
-	}
-	else if (id == 2)
-	{
-		//destruction dans game
 	}
 }

@@ -53,17 +53,17 @@ void Game::Run()
 
 void Game::onExit(int id)
 {
-    if (id == 0)
+    if (id == menu)
     {
 
     }
-    else if (id == 1)
+    else if (id == game)
     {
         m_bullets->clear();
         m_enemiesManager.m_enemyBullets.clear();
         m_enemiesManager.m_enemies.clear();
     }
-    else if (id == 2)
+    else if (id == gameOver)
     {
 
     }
@@ -71,11 +71,11 @@ void Game::onExit(int id)
 
 void Game::onEnter(int id)
 {
-    if (id == 0)
+    if (id == menu)
     {
         
     }
-    else if (id == 1)
+    else if (id == game)
     {
         m_bullets = new std::vector<Bullet*>;
         m_player = new Player(m_input, m_bullets);
@@ -83,7 +83,7 @@ void Game::onEnter(int id)
         //random nbEnemies : 5-20, random pattern : 0,1,2,3
         m_enemiesManager.initEnemies(rand() % 16 + 5, rand() % 4);
     }
-    else if (id == 2)
+    else if (id == gameOver)
     {
       
     }
@@ -93,7 +93,7 @@ void Game::onExecute(int id, float dt)
 {
     window.clear();
 
-    if (id == 0)
+    if (id == menu)
     {
         sf::Font font;
         font.openFromFile("golden_varsity/Golden Varsity Regular.ttf");
@@ -109,7 +109,7 @@ void Game::onExecute(int id, float dt)
             toState(1);
         }
     }
-    else if (id == 1)
+    else if (id == game)
     {
         if (m_enemiesManager.m_enemies.size() == 0) {
             if (m_stateTime >= 3.f) {
@@ -192,7 +192,7 @@ void Game::onExecute(int id, float dt)
         }
         
     }
-    else if (id == 2)
+    else if (id == gameOver)
     {
         sf::Font font;
         font.openFromFile("golden_varsity/Golden Varsity Regular.ttf");

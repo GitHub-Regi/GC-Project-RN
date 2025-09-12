@@ -24,6 +24,12 @@ private:
 
 	float speed = 0.f;
 
+	enum StateNames {
+		alive = 0,
+		touched,
+		dead
+	};
+
 public:
 
 	void onExit(int id) override;

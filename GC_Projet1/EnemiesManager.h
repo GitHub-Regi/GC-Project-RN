@@ -30,6 +30,17 @@ public:
 
 private: 
 	int m_nbEnemies;
+	int m_spawnLeftX = 25;
+	int m_spawnRightX = 1225;
+	int m_spawnY = 60;
+
+	enum PatternNames {
+		line = 0,
+		triangle,
+		lineMirror,
+		triangleMirror,
+		debugPattern
+	};
 
 };
 

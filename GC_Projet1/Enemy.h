@@ -24,12 +24,34 @@ public:
 private: 
 	float m_speed;
 	int m_pattern;
-	sf::Vector2f m_goal;
-	//std::vector<Bullet*>* m_bullets;
+	int m_goal;
 
 	float m_fireCooldown = 0.f;
 	float m_fireRate = 1.f;
 
 	EnemiesManager* enemiesManager;
+
+	enum StateNames {
+		spawning = 0,
+		alive,
+		touched,
+	};
+
+	enum PatternNames {
+		line = 0, 
+		triangle,
+		lineMirror,
+		triangleMirror,
+		debugPattern
+	};
+
+	enum Coordinates {
+		left = 25,
+		right = 1225,
+		midX = 640,
+		midXForShape = 625,
+		top = 60
+	};
+
 };
 

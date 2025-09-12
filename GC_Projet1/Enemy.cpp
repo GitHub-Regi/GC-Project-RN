@@ -21,25 +21,20 @@ void Enemy::initEnemy(int spawnX, int spawnY, int pattern, EnemiesManager* manag
     currentHealth = maxHealth;
 
     m_pattern = pattern;
-    if (m_pattern == 0) { //line
-        m_goal.x = 25;
-        m_goal.y = 60;
+    if (m_pattern == line) {
+        m_goal = left;
     }
-    else if (m_pattern == 1) { //half circle
-        m_goal.x = 625;
-        m_goal.y = 500;
+    else if (m_pattern == triangle) {
+        m_goal = midXForShape;
     }
-    else if (m_pattern == 2) { //line
-        m_goal.x = 1225;
-        m_goal.y = 60;
+    else if (m_pattern == lineMirror) { //line
+        m_goal = right;
     }
-    else if (m_pattern == 3) { //half circle
-        m_goal.x = 625;
-        m_goal.y = 500;
+    else if (m_pattern == triangleMirror) { //half circle
+        m_goal = midXForShape;
     }
     else {
-        m_goal.x = 0;
-        m_goal.y = 0;
+        m_goal = 0;
     }
 
     enemiesManager = manager;
@@ -55,159 +50,154 @@ void Enemy::Update(float dt)
 
 void Enemy::onExit(int id)
 {
-    if (id == 0)
+    if (id == spawning)
+    {
+        //Fin du spawn
+    }
+    else if (id == alive)
     {
         //Fin du mouvement
     }
-    else if (id == 1)
+    else if (id == touched)
     {
-        //Fin du crash
-    }
-    else if (id == 2)
-    {
-        //shape.setFillColor(sf::Color::Magenta);
+        //Fin de la touche
     }
 }
 
 void Enemy::onEnter(int id)
 {
-    if (id == 0)
+    if (id == spawning)
     {
-        //Pret a avancer
+        //Pret a spawn
     }
-    else if (id == 1)
+    else if (id == alive)
     {
+        //Pret a bouger
     }
-    else if (id == 2) //touch
+    else if (id == touched)
     {
         shape.setFillColor(sf::Color::Transparent);
-    }
-    else if (id == 3) //dead
-    {
-        shape.setFillColor(sf::Color::Red);
     }
 }
 
 void Enemy::onExecute(int id, float dt)
 {
-    if (id == 0) //spawning
+    if (id == spawning)
     { 
-            //Moving
-            sf::Vector2f movement(0.f, 0.f);
-            if (shape.getPosition().y != 60) {
-                movement.y += m_speed * dt;
-            }
-            else {
-                toState(1);
-            }
-            shape.move(movement);
+        //Moving
+        sf::Vector2f movement(0.f, 0.f);
+        if (shape.getPosition().y != top) {
+            movement.y += m_speed * dt;
+        }
+        else {
+            toState(1);
+        }
+        shape.move(movement);
 
-            sf::Vector2f pos = shape.getPosition();
-            if (pos.y > 60) pos.y = 60;
+        sf::Vector2f pos = shape.getPosition();
+        if (pos.y > top) pos.y = top;
 
-            shape.setPosition(pos);
+        shape.setPosition(pos);
     }
-    else if (id == 1) //alive
+    else if (id == alive)
     {
         //Moving
-        if (m_pattern == 0) { //pattern line
+        if (m_pattern == line) {
             sf::Vector2f movement(0.f, 0.f);
-            if (shape.getPosition().x != m_goal.x && m_goal.x > 640) {
+            if (shape.getPosition().x != m_goal && m_goal > midX) {
                 movement.x += m_speed * dt;
             }
-            if (shape.getPosition().x != m_goal.x && m_goal.x < 640) {
+            if (shape.getPosition().x != m_goal && m_goal < midX) {
                 movement.x -= m_speed * dt;
             }
             shape.move(movement);
 
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 1225) {
-                m_goal.x = 25;
+            if (shape.getPosition().x == m_goal && m_goal == right) {
+                m_goal = left;
             }
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 25) {
-                m_goal.x = 1225;
+            if (shape.getPosition().x == m_goal && m_goal == left) {
+                m_goal = right;
             }
 
             sf::Vector2f pos = shape.getPosition();
-            if (pos.x < 25) pos.x = 25;
-            if (pos.x > 1225) pos.x = 1225;
+            if (pos.x < left) pos.x = left;
+            if (pos.x > right) pos.x = right;
 
             shape.setPosition(pos);
         }
-        else if (m_pattern == 1) { //pattern half circle
+        else if (m_pattern == triangle) {
             sf::Vector2f movement(0.f, 0.f);
 
-            if (shape.getPosition().x != m_goal.x) {
-                if (m_goal.x == 625){
+            if (shape.getPosition().x != m_goal) {
+                if (m_goal == midXForShape){
                     movement.x += m_speed * dt;
                     movement.y += m_speed / 1.8f * dt;
                 }
-                if (m_goal.x == 1225) {
+                if (m_goal == right) {
                     movement.x += m_speed * dt;
                     movement.y -= m_speed / 1.8f * dt;
                 }
-                if (m_goal.x == 25) {
+                if (m_goal == left) {
                     movement.x -= m_speed * dt;
                 }
             }
 
             shape.move(movement);
             
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 625) {
-                m_goal.x = 1225;
+            if (shape.getPosition().x == m_goal && m_goal == midXForShape) {
+                m_goal = right;
             }
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 1225) {
-                m_goal.x = 25;
+            if (shape.getPosition().x == m_goal && m_goal == right) {
+                m_goal = left;
             }
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 25) {
-                m_goal.x = 625;
+            if (shape.getPosition().x == m_goal && m_goal == left) {
+                m_goal = midXForShape;
             }
 
             sf::Vector2f pos = shape.getPosition();
-            if (pos.x < 25) pos.x = 25;
-            if (pos.x > 1225) pos.x = 1225;
-            if (pos.x > 623 && pos.x < 627) pos.x = 625;
-            if (pos.y < 60) pos.y = 60;
-            if (pos.y > 500) pos.y = 500;
+            if (pos.x < left) pos.x = left;
+            if (pos.x > right) pos.x = right;
+            if (pos.x > midXForShape - 2 && pos.x < midXForShape + 2) pos.x = midXForShape;
 
             shape.setPosition(pos);
         }
-        //Moving
-        if (m_pattern == 2) { // pattern line mirror
+
+        if (m_pattern == lineMirror) {
             sf::Vector2f movement(0.f, 0.f);
-            if (shape.getPosition().x != m_goal.x && m_goal.x > 640) {
+            if (shape.getPosition().x != m_goal && m_goal > midX) {
                 movement.x += m_speed * dt;
             }
-            if (shape.getPosition().x != m_goal.x && m_goal.x < 640) {
+            if (shape.getPosition().x != m_goal && m_goal < midX) {
                 movement.x -= m_speed * dt;
             }
             shape.move(movement);
 
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 1225) {
-                m_goal.x = 25;
+            if (shape.getPosition().x == m_goal && m_goal == right) {
+                m_goal = left;
             }
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 25) {
-                m_goal.x = 1225;
+            if (shape.getPosition().x == m_goal && m_goal == left) {
+                m_goal = right;
             }
 
             sf::Vector2f pos = shape.getPosition();
-            if (pos.x < 25) pos.x = 25;
-            if (pos.x > 1225) pos.x = 1225;
+            if (pos.x < left) pos.x = left;
+            if (pos.x > right) pos.x = right;
 
             shape.setPosition(pos);
         }
-        else if (m_pattern == 3) { //pattern half circle mirror
+        else if (m_pattern == triangleMirror) {
             sf::Vector2f movement(0.f, 0.f);
 
-            if (shape.getPosition().x != m_goal.x) {
-                if (m_goal.x == 625) {
+            if (shape.getPosition().x != m_goal) {
+                if (m_goal == midXForShape) {
                     movement.x -= m_speed * dt;
                     movement.y += m_speed / 1.8f * dt;
                 }
-                if (m_goal.x == 1225) {
+                if (m_goal == right) {
                     movement.x += m_speed * dt;
      
                 }
-                if (m_goal.x == 25) {
+                if (m_goal == left) {
                     movement.x -= m_speed * dt;
                     movement.y -= m_speed / 1.8f * dt;
                 }
@@ -215,26 +205,24 @@ void Enemy::onExecute(int id, float dt)
 
             shape.move(movement);
 
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 625) {
-                m_goal.x = 25;
+            if (shape.getPosition().x == m_goal && m_goal == midXForShape) {
+                m_goal = left;
             }
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 25) {
-                m_goal.x = 1225;
+            if (shape.getPosition().x == m_goal && m_goal == left) {
+                m_goal = right;
             }
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 1225) {
-                m_goal.x = 625;
+            if (shape.getPosition().x == m_goal && m_goal == right) {
+                m_goal = midXForShape;
             }
 
             sf::Vector2f pos = shape.getPosition();
-            if (pos.x < 25) pos.x = 25;
-            if (pos.x > 1225) pos.x = 1225;
-            if (pos.x > 623 && pos.x < 627) pos.x = 625;
-            if (pos.y < 60) pos.y = 60;
-            if (pos.y > 500) pos.y = 500;
+            if (pos.x < left) pos.x = left;
+            if (pos.x > right) pos.x = right;
+            if (pos.x > midXForShape - 2 && pos.x < midXForShape + 2) pos.x = midXForShape;
 
             shape.setPosition(pos);
         }
-        else if (m_pattern == 4) { //test pattern
+        else if (m_pattern == debugPattern) {
 
         }
 
@@ -258,107 +246,105 @@ void Enemy::onExecute(int id, float dt)
 
         }
     }
-    else if (id == 2) //touch
+    else if (id == touched)
     {
         //Moving
-        if (m_pattern == 0) { //pattern line
+        if (m_pattern == line) {
             sf::Vector2f movement(0.f, 0.f);
-            if (shape.getPosition().x != m_goal.x && m_goal.x > 640) {
+            if (shape.getPosition().x != m_goal && m_goal > midX) {
                 movement.x += m_speed * dt;
             }
-            if (shape.getPosition().x != m_goal.x && m_goal.x < 640) {
+            if (shape.getPosition().x != m_goal && m_goal < midX) {
                 movement.x -= m_speed * dt;
             }
             shape.move(movement);
 
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 1225) {
-                m_goal.x = 25;
+            if (shape.getPosition().x == m_goal && m_goal == right) {
+                m_goal = left;
             }
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 25) {
-                m_goal.x = 1225;
+            if (shape.getPosition().x == m_goal && m_goal == left) {
+                m_goal = right;
             }
 
             sf::Vector2f pos = shape.getPosition();
-            if (pos.x < 25) pos.x = 25;
-            if (pos.x > 1225) pos.x = 1225;
+            if (pos.x < left) pos.x = left;
+            if (pos.x > right) pos.x = right;
 
             shape.setPosition(pos);
         }
-        else if (m_pattern == 1) { //pattern half circle
+        else if (m_pattern == triangle) {
             sf::Vector2f movement(0.f, 0.f);
 
-            if (shape.getPosition().x != m_goal.x) {
-                if (m_goal.x == 625) {
+            if (shape.getPosition().x != m_goal) {
+                if (m_goal == midXForShape) {
                     movement.x += m_speed * dt;
                     movement.y += m_speed / 1.8f * dt;
                 }
-                if (m_goal.x == 1225) {
+                if (m_goal == right) {
                     movement.x += m_speed * dt;
                     movement.y -= m_speed / 1.8f * dt;
                 }
-                if (m_goal.x == 25) {
+                if (m_goal == left) {
                     movement.x -= m_speed * dt;
                 }
             }
 
             shape.move(movement);
 
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 625) {
-                m_goal.x = 1225;
+            if (shape.getPosition().x == m_goal && m_goal == midXForShape) {
+                m_goal = right;
             }
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 1225) {
-                m_goal.x = 25;
+            if (shape.getPosition().x == m_goal && m_goal == right) {
+                m_goal = left;
             }
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 25) {
-                m_goal.x = 625;
+            if (shape.getPosition().x == m_goal && m_goal == left) {
+                m_goal = midXForShape;
             }
 
             sf::Vector2f pos = shape.getPosition();
-            if (pos.x < 25) pos.x = 25;
-            if (pos.x > 1225) pos.x = 1225;
-            if (pos.x > 623 && pos.x < 627) pos.x = 625;
-            if (pos.y < 60) pos.y = 60;
-            if (pos.y > 500) pos.y = 500;
+            if (pos.x < left) pos.x = left;
+            if (pos.x > right) pos.x = right;
+            if (pos.x > midXForShape - 2 && pos.x < midXForShape + 2) pos.x = midXForShape;
 
             shape.setPosition(pos);
         }
-        //Moving
-        if (m_pattern == 2) { // pattern line mirror
+
+        if (m_pattern == lineMirror) {
             sf::Vector2f movement(0.f, 0.f);
-            if (shape.getPosition().x != m_goal.x && m_goal.x > 640) {
+            if (shape.getPosition().x != m_goal && m_goal > midX) {
                 movement.x += m_speed * dt;
             }
-            if (shape.getPosition().x != m_goal.x && m_goal.x < 640) {
+            if (shape.getPosition().x != m_goal && m_goal < midX) {
                 movement.x -= m_speed * dt;
             }
             shape.move(movement);
 
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 1225) {
-                m_goal.x = 25;
+            if (shape.getPosition().x == m_goal && m_goal == right) {
+                m_goal = left;
             }
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 25) {
-                m_goal.x = 1225;
+            if (shape.getPosition().x == m_goal && m_goal == left) {
+                m_goal = right;
             }
 
             sf::Vector2f pos = shape.getPosition();
-            if (pos.x < 25) pos.x = 25;
-            if (pos.x > 1225) pos.x = 1225;
+            if (pos.x < left) pos.x = left;
+            if (pos.x > right) pos.x = right;
 
             shape.setPosition(pos);
         }
-        else if (m_pattern == 3) { //pattern half circle mirror
+        else if (m_pattern == triangleMirror) {
             sf::Vector2f movement(0.f, 0.f);
 
-            if (shape.getPosition().x != m_goal.x) {
-                if (m_goal.x == 625) {
+            if (shape.getPosition().x != m_goal) {
+                if (m_goal == midXForShape) {
                     movement.x -= m_speed * dt;
                     movement.y += m_speed / 1.8f * dt;
                 }
-                if (m_goal.x == 1225) {
+                if (m_goal == right) {
                     movement.x += m_speed * dt;
 
                 }
-                if (m_goal.x == 25) {
+                if (m_goal == left) {
                     movement.x -= m_speed * dt;
                     movement.y -= m_speed / 1.8f * dt;
                 }
@@ -366,26 +352,24 @@ void Enemy::onExecute(int id, float dt)
 
             shape.move(movement);
 
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 625) {
-                m_goal.x = 25;
+            if (shape.getPosition().x == m_goal && m_goal == midXForShape) {
+                m_goal = left;
             }
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 25) {
-                m_goal.x = 1225;
+            if (shape.getPosition().x == m_goal && m_goal == left) {
+                m_goal = right;
             }
-            if (shape.getPosition().x == m_goal.x && m_goal.x == 1225) {
-                m_goal.x = 625;
+            if (shape.getPosition().x == m_goal && m_goal == right) {
+                m_goal = midXForShape;
             }
 
             sf::Vector2f pos = shape.getPosition();
-            if (pos.x < 25) pos.x = 25;
-            if (pos.x > 1225) pos.x = 1225;
-            if (pos.x > 622 && pos.x < 628) pos.x = 625;
-            if (pos.y < 60) pos.y = 60;
-            if (pos.y > 500) pos.y = 500;
+            if (pos.x < left) pos.x = left;
+            if (pos.x > right) pos.x = right;
+            if (pos.x > midXForShape - 3 && pos.x < midXForShape + 3) pos.x = midXForShape;
 
             shape.setPosition(pos);
         }
-        else if (m_pattern == 4) { //test pattern
+        else if (m_pattern == debugPattern) {
 
         }
 
@@ -402,12 +386,7 @@ void Enemy::onExecute(int id, float dt)
         if (m_stateTime >= 0.3f)
         {
             shape.setFillColor(sf::Color(255, 140, 0, 255));
-            //this->SetCurrentHealth(-20);
             toState(1);
         }
-    }
-    else if (id == 3) //dead
-    {
-        
     }
 }
