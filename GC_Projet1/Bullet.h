@@ -6,6 +6,7 @@ class Bullet : public Entity
 {
 public :
 	Bullet();
+
 	~Bullet();
 
 private:

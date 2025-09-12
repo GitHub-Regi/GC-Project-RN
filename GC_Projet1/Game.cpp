@@ -6,11 +6,6 @@
 #include <stdlib.h>    
 #include <time.h>
 
-#include "Player.h"
-#include "Input.h"
-#include "Timer.h"
-#include "Bullet.h"
-
 Game::Game()
     : window(sf::VideoMode({ 1280, 720 }), "SFML works!")
 {
@@ -41,7 +36,6 @@ void Game::Run()
                 window.close();
         }
 
-        
         float dt = m_timer.getDeltaTime();
         m_timer.UpdateDeltaTime();
         m_input->update();
@@ -53,39 +47,23 @@ void Game::Run()
 
 void Game::onExit(int id)
 {
-    if (id == menu)
-    {
-
-    }
-    else if (id == game)
+    if (id == 1)
     {
         m_bullets->clear();
         m_enemiesManager.m_enemyBullets.clear();
         m_enemiesManager.m_enemies.clear();
     }
-    else if (id == gameOver)
-    {
-
-    }
 }
 
 void Game::onEnter(int id)
 {
-    if (id == menu)
-    {
-        
-    }
-    else if (id == game)
+    if (id == 1)
     {
         m_bullets = new std::vector<Bullet*>;
         m_player = new Player(m_input, m_bullets);
         m_player->initPlayer();
         //random nbEnemies : 5-20, random pattern : 0,1,2,3
         m_enemiesManager.initEnemies(rand() % 16 + 5, rand() % 4);
-    }
-    else if (id == gameOver)
-    {
-      
     }
 }
 
@@ -100,8 +78,8 @@ void Game::onExecute(int id, float dt)
         sf::Text text(font);
         text.setString("Press Enter");
         text.setCharacterSize(100);
-        text.setFillColor(sf::Color::Red);
-        text.setPosition(sf::Vector2f(380.f, 310.f));
+        text.setFillColor(textColor);
+        text.setPosition(sf::Vector2f(introTextPositionX, introTextPositionY));
         window.draw(text);
 
         if (m_input->IsKeyDown(VK_RETURN))
@@ -132,7 +110,7 @@ void Game::onExecute(int id, float dt)
                 {
                     if (Collision::IsColliding((*m_enemiesManager.m_enemies[i]).GetShape(), b->GetShape()))
                     {
-                        (*m_enemiesManager.m_enemies[i]).SetCurrentHealth(-20);
+                        (*m_enemiesManager.m_enemies[i]).SetCurrentHealth(-40);
                         b->toState(1);
                         (*m_enemiesManager.m_enemies[i]).toState(2);
 
@@ -189,8 +167,7 @@ void Game::onExecute(int id, float dt)
             {
                 toState(2);
             }
-        }
-        
+        } 
     }
     else if (id == gameOver)
     {
@@ -199,8 +176,8 @@ void Game::onExecute(int id, float dt)
         sf::Text text(font);
         text.setString("Game Over !\n Try Again ?");
         text.setCharacterSize(100);
-        text.setFillColor(sf::Color::Red);
-        text.setPosition(sf::Vector2f(380.f, 210.f));
+        text.setFillColor(textColor);
+        text.setPosition(sf::Vector2f(outroTextPositionX, outroTextPositionY));
         window.draw(text);
 
         if (m_input->IsKeyDown(VK_RETURN))

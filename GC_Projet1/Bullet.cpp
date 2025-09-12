@@ -25,23 +25,11 @@ void Bullet::Update(float dt)
 
 void Bullet::onExit(int id)
 {
-	if (id == moving)
-	{
-		//Fin du mouvement
-	}
-	else if (id == explodes)
-	{
-		//Fin de l'explosion
-	}
 }
 
 void Bullet::onEnter(int id)
 {
-	if (id == moving)
-	{
-		//Pret a avancer
-	}
-	else if (id == explodes)
+	if (id == 1)
 	{
 		shape.setFillColor(sf::Color::Red);
 	}

@@ -2,6 +2,7 @@
 
 Player::Player() 
 {
+
 }
 
 Player::Player(Input* input, std::vector<Bullet*>* bullets)
@@ -16,11 +17,10 @@ Player::~Player()
 }
 
 void Player::initPlayer(){
-    shape.setSize(sf::Vector2f(40, 70));
-    shape.setOrigin({ 0.f, 0.f });
-    shape.setFillColor(sf::Color(34, 139, 34, 255));
+    shape.setSize(sf::Vector2f(playerSizeX, playerSizeY));
+    shape.setOrigin({ playerOriginX, playerOriginY });
     shape.setPosition({ 620.f, 600.f });
-    speed = 350.f;
+    shape.setFillColor(playerColor);
 
     currentHealth = maxHealth;
 
@@ -42,15 +42,15 @@ void Player::onEnter(int id)
 {
     if (id == alive)
     {
-        shape.setFillColor(sf::Color(34, 139, 34, 255));
+        shape.setFillColor(playerColor);
     }
     else if (id == touched)
     {
-        shape.setFillColor(sf::Color(255, 215, 0, 255));
+        shape.setFillColor(playerColorImpact);
     }
     else if (id == dead)
     {
-        shape.setFillColor(sf::Color::Red);
+        shape.setFillColor(playerColorImpact);
     }
 
     m_stateTime = 0.f;
@@ -71,6 +71,8 @@ void Player::onExecute(int id, float dt)
     }
 
     if (id == alive && m_input->IsKeyDown('P'))
+    //Debug
+    if (id == 0 && m_input->IsKeyDown('P'))
     {
         currentHealth -= 100.f;
 
@@ -85,48 +87,51 @@ void Player::onExecute(int id, float dt)
         }
     }
 
-    sf::Vector2f movement(0.f, 0.f);
+    //Shooting
+    if (id == 0 && m_input->IsKeyDown(spaceBar))
+    {
+        sf::Vector2f bulletPos = shape.getPosition();
+        bulletPos.y -= shape.getSize().y / 4.f;
+        bulletPos.x += 15.f;;
+
+        Bullet* bul = new Bullet();
+        bul->initBullet(bulletPos, playerBulletsColor);
+        m_bullets->push_back(bul);
+        bul->SetSpeed(400.f);
+    }
+
+    //Movement
+    sf::Vector2f playerMovement = sf::Vector2f(0.f, 0.f);
 
     if (id == alive || id == touched)
     {
         //Moving Right
         if (m_input->IsKey('D'))
         {
-            movement.x += speed * dt;
-        }
-        if (m_input->IsKeyDown('D')) {
-            movement.x += speed * dt;
+            playerMovement.x += speed * dt;
         }
 
         //Moving Left
         if (m_input->IsKey('Q'))
         {
-            movement.x -= speed * dt;
-        }
-        if (m_input->IsKeyDown('Q')) {
-            movement.x -= speed * dt;
+            playerMovement.x -= speed * dt;
         }
 
         //Moving Up
         if (m_input->IsKey('Z'))
         {
-            movement.y -= speed * dt;
-        }
-        if (m_input->IsKeyDown('Z')) {
-            movement.y -= speed * dt;
+            playerMovement.y -= speed * dt;
         }
 
         //Moving Down
         if (m_input->IsKey('S'))
         {
-            movement.y += speed * dt;
-        }
-        if (m_input->IsKeyDown('S')) {
-            movement.y += speed * dt;
+            playerMovement.y += speed * dt;
         }
 
-        shape.move(movement);
+        shape.move(playerMovement);
 
+        //Movement clamping
         sf::Vector2f pos = shape.getPosition();
         sf::Vector2f size = shape.getSize();
 
@@ -138,13 +143,9 @@ void Player::onExecute(int id, float dt)
         shape.setPosition(pos);
     }
 
-    if (id == touched && m_stateTime >= 1.0f)
+    //Player hit -> 1 second invincibility
+    if (id == 1 && m_stateTime >= 1.0f)
     {
         toState(0);
-    }
-
-    if (id == dead && m_stateTime >= 1.0f)
-    {
-        //Destruction du joueur dans Game
     }
 }

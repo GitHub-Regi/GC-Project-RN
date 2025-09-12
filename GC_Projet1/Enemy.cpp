@@ -11,11 +11,10 @@ Enemy::~Enemy()
 
 void Enemy::initEnemy(int spawnX, int spawnY, int pattern, EnemiesManager* manager)
 {
-    shape.setSize(sf::Vector2f(30, 50));
-    shape.setOrigin({ 0.f, 0.f }); //modifie le point d'origine de la forme (ici au milieu bas)
-    shape.setFillColor(sf::Color(255, 140, 0, 255));
-    //Random this
-    shape.setPosition({ float(spawnX) , float(spawnY) }); 
+    shape.setSize(sf::Vector2f(enemySizeX, enemySizeY));
+    shape.setOrigin({ enemyOriginX, enemyOriginY }); 
+    shape.setFillColor(enemyColor);
+    shape.setPosition({ float(spawnX), float(spawnY) }); 
     m_speed = 200.f;
 
     currentHealth = maxHealth;
@@ -50,33 +49,19 @@ void Enemy::Update(float dt)
 
 void Enemy::onExit(int id)
 {
-    if (id == spawning)
-    {
-        //Fin du spawn
-    }
-    else if (id == alive)
-    {
-        //Fin du mouvement
-    }
-    else if (id == touched)
-    {
-        //Fin de la touche
-    }
 }
 
 void Enemy::onEnter(int id)
 {
-    if (id == spawning)
-    {
-        //Pret a spawn
-    }
-    else if (id == alive)
-    {
-        //Pret a bouger
-    }
-    else if (id == touched)
+    //Hit
+    if (id == 2) 
     {
         shape.setFillColor(sf::Color::Transparent);
+    }
+    //Crash
+    else if (id == 3) 
+    {
+        shape.setFillColor(sf::Color::Red);
     }
 }
 
@@ -110,6 +95,7 @@ void Enemy::onExecute(int id, float dt)
             if (shape.getPosition().x != m_goal && m_goal < midX) {
                 movement.x -= m_speed * dt;
             }
+
             shape.move(movement);
 
             if (shape.getPosition().x == m_goal && m_goal == right) {
@@ -170,6 +156,7 @@ void Enemy::onExecute(int id, float dt)
             if (shape.getPosition().x != m_goal && m_goal < midX) {
                 movement.x -= m_speed * dt;
             }
+
             shape.move(movement);
 
             if (shape.getPosition().x == m_goal && m_goal == right) {
@@ -226,6 +213,7 @@ void Enemy::onExecute(int id, float dt)
 
         }
 
+        //Shooting
         m_fireCooldown += dt;
 
         if (m_fireCooldown >= m_fireRate)
@@ -237,7 +225,7 @@ void Enemy::onExecute(int id, float dt)
             bulletPos.y += shape.getSize().y;
             bulletPos.x += 10;
 
-            bul->initBullet(bulletPos, sf::Color(192, 192, 192, 255));
+            bul->initBullet(bulletPos, enemyBulletsColor);
 
             bul->SetSpeed(-400.f);
 
@@ -257,6 +245,7 @@ void Enemy::onExecute(int id, float dt)
             if (shape.getPosition().x != m_goal && m_goal < midX) {
                 movement.x -= m_speed * dt;
             }
+
             shape.move(movement);
 
             if (shape.getPosition().x == m_goal && m_goal == right) {
@@ -317,6 +306,7 @@ void Enemy::onExecute(int id, float dt)
             if (shape.getPosition().x != m_goal && m_goal < midX) {
                 movement.x -= m_speed * dt;
             }
+
             shape.move(movement);
 
             if (shape.getPosition().x == m_goal && m_goal == right) {
@@ -373,11 +363,10 @@ void Enemy::onExecute(int id, float dt)
 
         }
 
-        //touch animation
-
+        //Hit animation
         if (m_stateTime >= 0.1f)
         {
-            shape.setFillColor(sf::Color(255, 140, 0, 255));
+            shape.setFillColor(enemyColor);
         }
         if (m_stateTime >= 0.2f)
         {
@@ -385,7 +374,7 @@ void Enemy::onExecute(int id, float dt)
         }
         if (m_stateTime >= 0.3f)
         {
-            shape.setFillColor(sf::Color(255, 140, 0, 255));
+            shape.setFillColor(enemyColor);
             toState(1);
         }
     }

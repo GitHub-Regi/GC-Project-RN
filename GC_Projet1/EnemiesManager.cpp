@@ -27,6 +27,7 @@ void EnemiesManager::initEnemies(int nbEnemies, int pattern)
 		else if (pattern == lineMirror || pattern == triangleMirror) {
 			e->initEnemy(m_spawnRightX, m_spawnY - i, pattern, this);
 		}
+
 		m_enemies.push_back(e);
 	}
 }
