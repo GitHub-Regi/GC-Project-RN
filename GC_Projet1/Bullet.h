@@ -12,7 +12,7 @@ private:
 	float speed = 0.f;
 
 public:
-	void initBullet(sf::Vector2f position);
+	void initBullet(sf::Vector2f position, sf::Color color);
 
 	void Update(float dt) override;
 

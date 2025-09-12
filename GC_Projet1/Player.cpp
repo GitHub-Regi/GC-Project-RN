@@ -18,7 +18,7 @@ Player::~Player()
 void Player::initPlayer(){
     shape.setSize(sf::Vector2f(40, 70));
     shape.setOrigin({ 0.f, 0.f });
-    shape.setFillColor(sf::Color::Green);
+    shape.setFillColor(sf::Color(34, 139, 34, 255));
     shape.setPosition({ 620.f, 600.f });
     speed = 350.f;
 
@@ -42,11 +42,11 @@ void Player::onEnter(int id)
 {
     if (id == 0)
     {
-        shape.setFillColor(sf::Color::Green);
+        shape.setFillColor(sf::Color(34, 139, 34, 255));
     }
     else if (id == 1)
     {
-        shape.setFillColor(sf::Color::Yellow);
+        shape.setFillColor(sf::Color(255, 215, 0, 255));
     }
     else if (id == 2)
     {
@@ -65,7 +65,7 @@ void Player::onExecute(int id, float dt)
         bulletPos.x += 15;
 
         Bullet* bul = new Bullet();
-        bul->initBullet(bulletPos);
+        bul->initBullet(bulletPos, sf::Color(30, 144, 255, 255));
         m_bullets->push_back(bul);
         bul->SetSpeed(400.f);
     }

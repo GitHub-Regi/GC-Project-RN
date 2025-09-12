@@ -8,10 +8,10 @@ Bullet::~Bullet()
 {
 }
 
-void Bullet::initBullet(sf::Vector2f position)
+void Bullet::initBullet(sf::Vector2f position, sf::Color color)
 {
 	shape.setSize(sf::Vector2f(10, 20));
-	shape.setFillColor(sf::Color::Blue);
+	shape.setFillColor(color);
 	shape.setPosition(position);
 	
 	toState(0);

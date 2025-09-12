@@ -13,7 +13,7 @@ void Enemy::initEnemy(int spawnX, int spawnY, int pattern, EnemiesManager* manag
 {
     shape.setSize(sf::Vector2f(30, 50));
     shape.setOrigin({ 0.f, 0.f }); //modifie le point d'origine de la forme (ici au milieu bas)
-    shape.setFillColor(sf::Color::Magenta);
+    shape.setFillColor(sf::Color(255, 140, 0, 255));
     //Random this
     shape.setPosition({ float(spawnX) , float(spawnY) }); 
     m_speed = 200.f;
@@ -249,7 +249,7 @@ void Enemy::onExecute(int id, float dt)
             bulletPos.y += shape.getSize().y;
             bulletPos.x += 10;
 
-            bul->initBullet(bulletPos);
+            bul->initBullet(bulletPos, sf::Color(192, 192, 192, 255));
 
             bul->SetSpeed(-400.f);
 
@@ -393,7 +393,7 @@ void Enemy::onExecute(int id, float dt)
 
         if (m_stateTime >= 0.1f)
         {
-            shape.setFillColor(sf::Color::Magenta);
+            shape.setFillColor(sf::Color(255, 140, 0, 255));
         }
         if (m_stateTime >= 0.2f)
         {
@@ -401,7 +401,7 @@ void Enemy::onExecute(int id, float dt)
         }
         if (m_stateTime >= 0.3f)
         {
-            shape.setFillColor(sf::Color::Magenta);
+            shape.setFillColor(sf::Color(255, 140, 0, 255));
             //this->SetCurrentHealth(-20);
             toState(1);
         }
