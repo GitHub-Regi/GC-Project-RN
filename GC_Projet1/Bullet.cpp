@@ -60,7 +60,7 @@ void Bullet::onExecute(int id, float dt)
 	}
 	else if (id == 1)
 	{
-		if (m_stateTime >= 0.5f)
+		if (m_stateTime >= 0.05f)
 		{
 			toState(2);
 		}
