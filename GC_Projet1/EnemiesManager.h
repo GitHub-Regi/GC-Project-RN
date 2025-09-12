@@ -13,8 +13,19 @@ public:
 
 	~EnemiesManager();
 
-private: 
+private:
 	int m_nbEnemies;
+	int m_spawnLeftX = 25;
+	int m_spawnRightX = 1225;
+	int m_spawnY = 60;
+
+	enum PatternNames {
+		line = 0,
+		triangle,
+		lineMirror,
+		triangleMirror,
+		debugPattern
+	};
 
 public:
 	std::vector<Enemy*> m_enemies;
@@ -31,20 +42,6 @@ public:
 	void UpdateBullets(float dt);
 
 	void DrawEnemyBullets(sf::RenderWindow& w);
-
-private: 
-	int m_nbEnemies;
-	int m_spawnLeftX = 25;
-	int m_spawnRightX = 1225;
-	int m_spawnY = 60;
-
-	enum PatternNames {
-		line = 0,
-		triangle,
-		lineMirror,
-		triangleMirror,
-		debugPattern
-	};
 
 };
 

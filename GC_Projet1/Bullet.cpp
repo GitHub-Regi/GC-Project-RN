@@ -29,7 +29,7 @@ void Bullet::onExit(int id)
 
 void Bullet::onEnter(int id)
 {
-	if (id == 1)
+	if (id == explodes)
 	{
 		shape.setFillColor(sf::Color::Red);
 	}

@@ -54,14 +54,9 @@ void Enemy::onExit(int id)
 void Enemy::onEnter(int id)
 {
     //Hit
-    if (id == 2) 
+    if (id == touched) 
     {
         shape.setFillColor(sf::Color::Transparent);
-    }
-    //Crash
-    else if (id == 3) 
-    {
-        shape.setFillColor(sf::Color::Red);
     }
 }
 

@@ -50,7 +50,7 @@ void Player::onEnter(int id)
     }
     else if (id == dead)
     {
-        shape.setFillColor(playerColorImpact);
+        shape.setFillColor(playerColorCrash);
     }
 
     m_stateTime = 0.f;
@@ -58,21 +58,8 @@ void Player::onEnter(int id)
 
 void Player::onExecute(int id, float dt)
 {
-    if (id == alive && m_input->IsKeyDown(32))
-    {
-        sf::Vector2f bulletPos = shape.getPosition();
-        bulletPos.y -= shape.getSize().y / 4;
-        bulletPos.x += 15;
-
-        Bullet* bul = new Bullet();
-        bul->initBullet(bulletPos, sf::Color(30, 144, 255, 255));
-        m_bullets->push_back(bul);
-        bul->SetSpeed(400.f);
-    }
-
-    if (id == alive && m_input->IsKeyDown('P'))
     //Debug
-    if (id == 0 && m_input->IsKeyDown('P'))
+    if (id == alive && m_input->IsKeyDown('P'))
     {
         currentHealth -= 100.f;
 
@@ -88,7 +75,7 @@ void Player::onExecute(int id, float dt)
     }
 
     //Shooting
-    if (id == 0 && m_input->IsKeyDown(spaceBar))
+    if (id == alive && m_input->IsKeyDown(spaceBar))
     {
         sf::Vector2f bulletPos = shape.getPosition();
         bulletPos.y -= shape.getSize().y / 4.f;
