@@ -1,2 +1,9 @@
-﻿  Player.cpp
+﻿  EnemiesManager.cpp
+C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\EnemiesManager.cpp(12,13): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+  Game.cpp
+C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Game.cpp(33,15): warning C4244: 'argument' : conversion de 'time_t' en 'unsigned int', perte possible de données
+C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Game.cpp(99,26): warning C4834: abandon de la valeur de retour de la fonction ayant l'attribut 'nodiscard'
+C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Game.cpp(129,24): warning C4267: 'initialisation' : conversion de 'size_t' en 'int', perte possible de données
+C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\GC_Projet1\Game.cpp(198,26): warning C4834: abandon de la valeur de retour de la fonction ayant l'attribut 'nodiscard'
+  Génération de code en cours...
   GC_Projet1.vcxproj -> C:\Users\ndind\source\repos\GC_Projet1\GC-Project-RN\x64\Debug\GC_Projet1.exe

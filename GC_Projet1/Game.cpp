@@ -60,6 +60,7 @@ void Game::onExit(int id)
     else if (id == 1)
     {
         m_bullets->clear();
+        m_enemiesManager.m_enemyBullets.clear();
         m_enemiesManager.m_enemies.clear();
     }
     else if (id == 2)
