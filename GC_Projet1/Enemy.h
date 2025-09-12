@@ -2,17 +2,16 @@
 
 #include "Entity.h"
 #include "Collision.h"
+#include "EnemiesManager.h"
 
 class Enemy : public Entity
 {
 public: 
 	Enemy();
 
-	Enemy(std::vector<Bullet*>* bullets);
-
 	virtual ~Enemy();
 
-	void initEnemy(int spawnX, int spawnY, int pattern);
+	void initEnemy(int spawnX, int spawnY, int pattern, EnemiesManager* enemiesManager);
 
 	void Update(float dt) override;
 
@@ -26,6 +25,11 @@ private:
 	float m_speed;
 	int m_pattern;
 	sf::Vector2f m_goal;
-	std::vector<Bullet*>* m_bullets;
+	//std::vector<Bullet*>* m_bullets;
+
+	float m_fireCooldown = 0.f;
+	float m_fireRate = 1.f;
+
+	EnemiesManager* enemiesManager;
 };
 

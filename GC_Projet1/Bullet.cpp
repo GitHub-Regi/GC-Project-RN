@@ -51,11 +51,11 @@ void Bullet::onExecute(int id, float dt)
 {
 	if (id == 0)
 	{
-		shape.move(sf::Vector2f(0.f, -speed * dt));
+		shape.move(sf::Vector2f(0.f, speed * dt));
 	}
 	else if (id == 1)
 	{
-		if (m_stateTime >= 0.1f)
+		if (m_stateTime >= 0.05f)
 		{
 			toState(2);
 		}

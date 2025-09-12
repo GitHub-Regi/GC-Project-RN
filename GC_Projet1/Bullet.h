@@ -9,7 +9,7 @@ public :
 	~Bullet();
 
 private:
-	float speed = 400.f;
+	float speed = 0.f;
 
 public:
 	void initBullet(sf::Vector2f position);
@@ -21,6 +21,8 @@ public:
 	void onEnter(int id) override;
 
 	void onExecute(int id, float dt) override;
+
+	void SetSpeed(float amount) { speed -= amount; }
 
 };
 

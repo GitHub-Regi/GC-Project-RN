@@ -108,6 +108,7 @@ void Game::onExecute(int id, float dt)
     {
         m_player->Update(dt);
         m_enemiesManager.updateEnemies(dt);
+        m_enemiesManager.UpdateBullets(dt);
 
         for (Bullet* b: (*m_bullets))
         {
@@ -145,9 +146,28 @@ void Game::onExecute(int id, float dt)
                 ++it;
             }
         }
+
+        for (auto b : m_enemiesManager.m_enemyBullets)
+        {
+            if (b->GetState() == 0)
+            {
+                if (Collision::IsColliding(m_player->GetShape(), b->GetShape()) && m_player->GetState() != 1)
+                {
+                    m_player->SetCurrentHealth(-10.f);
+                    m_player->toState(1);
+                    b->toState(1);
+                }
+
+                if (m_player->GetCurrentHealth() <= 0.f)
+                {
+                    m_player->toState(2);
+                }
+            }
+        }
 ;       
         m_player->Draw(window);
         m_enemiesManager.drawEnemies(window);
+        m_enemiesManager.DrawEnemyBullets(window);
         for (Bullet* b : (*m_bullets)) b->Draw(window);
 
         if (m_player->GetState() == 2)

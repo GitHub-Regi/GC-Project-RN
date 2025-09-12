@@ -17,9 +17,9 @@ Player::~Player()
 
 void Player::initPlayer(){
     shape.setSize(sf::Vector2f(40, 70));
-    shape.setOrigin({ 20.f, 70.f });
+    shape.setOrigin({ 0.f, 0.f });
     shape.setFillColor(sf::Color::Green);
-    shape.setPosition({ 640.f, 650.f });
+    shape.setPosition({ 620.f, 600.f });
     speed = 350.f;
 
     currentHealth = maxHealth;
@@ -61,12 +61,13 @@ void Player::onExecute(int id, float dt)
     if (id == 0 && m_input->IsKeyDown(32))
     {
         sf::Vector2f bulletPos = shape.getPosition();
-        bulletPos.y -= shape.getSize().y;
-        bulletPos.x -= 5;
+        bulletPos.y -= shape.getSize().y / 4;
+        bulletPos.x += 15;
 
         Bullet* bul = new Bullet();
         bul->initBullet(bulletPos);
         m_bullets->push_back(bul);
+        bul->SetSpeed(400.f);
     }
 
     if (id == 0 && m_input->IsKeyDown('P'))
@@ -130,9 +131,9 @@ void Player::onExecute(int id, float dt)
         sf::Vector2f size = shape.getSize();
 
         if (pos.x < 30) pos.x = 30;
-        if (pos.y < 550) pos.y = 550;
+        if (pos.y < 500) pos.y = 500;
         if (pos.x > 1250) pos.x = 1250;
-        if (pos.y > 650) pos.y = 650;
+        if (pos.y > 600) pos.y = 600;
 
         shape.setPosition(pos);
     }

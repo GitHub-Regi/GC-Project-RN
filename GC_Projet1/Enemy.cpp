@@ -2,13 +2,14 @@
 
 Enemy::Enemy() : m_speed(), m_pattern(), m_goal()
 {
+
 }
 
 Enemy::~Enemy()
 {
 }
 
-void Enemy::initEnemy(int spawnX, int spawnY, int pattern)
+void Enemy::initEnemy(int spawnX, int spawnY, int pattern, EnemiesManager* manager)
 {
     shape.setSize(sf::Vector2f(30, 50));
     shape.setOrigin({ 0.f, 0.f }); //modifie le point d'origine de la forme (ici au milieu bas)
@@ -32,6 +33,8 @@ void Enemy::initEnemy(int spawnX, int spawnY, int pattern)
         m_goal.x = 0;
         m_goal.y = 0;
     }
+
+    enemiesManager = manager;
     
     toState(0);
 }
@@ -93,7 +96,6 @@ void Enemy::onExecute(int id, float dt)
     }
     else if (id == 1) //alive
     {
-
         //Moving
         if (m_pattern == 0) {
             sf::Vector2f movement(0.f, 0.f);
@@ -147,8 +149,6 @@ void Enemy::onExecute(int id, float dt)
                 m_goal.x = 625;
             }
 
-            
-
             sf::Vector2f pos = shape.getPosition();
             if (pos.x < 80) pos.x = 80;
             if (pos.x > 1200) pos.x = 1200;
@@ -159,7 +159,25 @@ void Enemy::onExecute(int id, float dt)
             shape.setPosition(pos);
         }
 
-        //shooting
+        m_fireCooldown += dt;
+
+        if (m_fireCooldown >= m_fireRate)
+        {
+            m_fireCooldown = 0.f;
+
+            Bullet* bul = new Bullet();
+            sf::Vector2f bulletPos = shape.getPosition();
+            bulletPos.y += shape.getSize().y;
+            bulletPos.x += 10;
+
+            bul->initBullet(bulletPos);
+
+            bul->SetSpeed(-400.f);
+
+            enemiesManager->AddBullet(bul);
+
+
+        }
     }
     else if (id == 2) //dead
     {
