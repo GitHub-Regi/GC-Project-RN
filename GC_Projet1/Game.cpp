@@ -113,18 +113,20 @@ void Game::onExecute(int id, float dt)
         {
             b->Update(dt);
 
-            for (auto e : m_enemiesManager.m_enemies)
+            for (int i = m_enemiesManager.m_enemies.size() - 1; i >= 0; i--) 
             {
                 if (b->GetState() == 0)
                 {
-                    if (Collision::IsColliding(e->GetShape(), b->GetShape()))
+                    if (Collision::IsColliding((*m_enemiesManager.m_enemies[i]).GetShape(), b->GetShape()))
                     {
-                        e->SetCurrentHealth(-20);
+                        (*m_enemiesManager.m_enemies[i]).SetCurrentHealth(-20);
                         b->toState(1);
 
-                        if (e->GetCurrentHealth() <= 0.f)
+                        if ((*m_enemiesManager.m_enemies[i]).GetCurrentHealth() <= 0.f)
                         {
-                            e->toState(2);
+                            (*m_enemiesManager.m_enemies[i]).toState(2);
+                            delete m_enemiesManager.m_enemies[i];
+                            m_enemiesManager.m_enemies.erase(m_enemiesManager.m_enemies.begin() + i);
                         }
                     }
                 }
