@@ -21,7 +21,12 @@ void EnemiesManager::initEnemies(int nbEnemies, int pattern)
 	m_nbEnemies = nbEnemies;
 	for (int i = 0; i < m_nbEnemies * 60; i = i + 60) {
 		Enemy* e = new Enemy;
-		e->initEnemy(40, 60 - i, pattern, this);
+		if (pattern == 0 || pattern == 1 || pattern == 4){
+			e->initEnemy(25, 60 - i, pattern);
+		}
+		else if (pattern == 2 || pattern == 3) {
+			e->initEnemy(1225, 60 - i, pattern);
+		}
 		m_enemies.push_back(e);
 	}
 }

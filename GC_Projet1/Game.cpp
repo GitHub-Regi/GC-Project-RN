@@ -3,6 +3,8 @@
 #include "framework.h"
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <stdlib.h>    
+#include <time.h>
 
 #include "Player.h"
 #include "Input.h"
@@ -28,6 +30,7 @@ Game::~Game()
 void Game::Run()
 {
     window.setFramerateLimit(60);
+    srand(time(NULL));
 
     while (window.isOpen())
     {
@@ -76,7 +79,8 @@ void Game::onEnter(int id)
         m_bullets = new std::vector<Bullet*>;
         m_player = new Player(m_input, m_bullets);
         m_player->initPlayer();
-        m_enemiesManager.initEnemies(10, 1);
+        //random nbEnemies : 5-20, random pattern : 0,1,2,3
+        m_enemiesManager.initEnemies(rand() % 16 + 5, rand() % 4);
     }
     else if (id == 2)
     {
@@ -96,7 +100,7 @@ void Game::onExecute(int id, float dt)
         text.setString("Press Enter");
         text.setCharacterSize(100);
         text.setFillColor(sf::Color::Red);
-        text.setPosition(sf::Vector2f(300.f, 350.f));
+        text.setPosition(sf::Vector2f(380.f, 310.f));
         window.draw(text);
 
         if (m_input->IsKeyDown(VK_RETURN))
@@ -106,6 +110,13 @@ void Game::onExecute(int id, float dt)
     }
     else if (id == 1)
     {
+        if (m_enemiesManager.m_enemies.size() == 0) {
+            if (m_stateTime >= 3.f) {
+                //random nbEnemies : 5-20, random pattern : 0,1,2,3
+                m_enemiesManager.initEnemies(rand() % 16 + 5, rand() % 4);
+            }
+        }
+
         m_player->Update(dt);
         m_enemiesManager.updateEnemies(dt);
         m_enemiesManager.UpdateBullets(dt);
@@ -122,10 +133,11 @@ void Game::onExecute(int id, float dt)
                     {
                         (*m_enemiesManager.m_enemies[i]).SetCurrentHealth(-20);
                         b->toState(1);
+                        (*m_enemiesManager.m_enemies[i]).toState(2);
 
                         if ((*m_enemiesManager.m_enemies[i]).GetCurrentHealth() <= 0.f)
                         {
-                            (*m_enemiesManager.m_enemies[i]).toState(2);
+                            (*m_enemiesManager.m_enemies[i]).toState(3);
                             delete m_enemiesManager.m_enemies[i];
                             m_enemiesManager.m_enemies.erase(m_enemiesManager.m_enemies.begin() + i);
                         }
@@ -187,7 +199,7 @@ void Game::onExecute(int id, float dt)
         text.setString("Game Over !\n Try Again ?");
         text.setCharacterSize(100);
         text.setFillColor(sf::Color::Red);
-        text.setPosition(sf::Vector2f(300.f, 350.f));
+        text.setPosition(sf::Vector2f(380.f, 210.f));
         window.draw(text);
 
         if (m_input->IsKeyDown(VK_RETURN))
